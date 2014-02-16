@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface lockeAppDelegate : UIResponder <UIApplicationDelegate>
-
+@interface lockeAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+{
+    NSManagedObjectContext         *_managedObjContext;
+    NSManagedObjectModel           *_managedObjModel;
+    NSPersistentStoreCoordinator   *_persistentStoreCoordinator;
+}
 @property (strong, nonatomic) UIWindow *window;
-
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) UITabBarController *tabBarController;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (void)setPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 @end
+

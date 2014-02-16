@@ -7,19 +7,64 @@
 //
 
 #import "lockeAppDelegate.h"
+#import "FirstViewController.h"
+#import "FollowerVC.h"
+#import "SettingVC.h"
+#import "ProfileVC.h"
+#import "FollowAndFansVC.h"
+#import "MetionsStatusesVC.h"
+#import "ZJTProfileViewController.h"
+#import "BilateralTableViewController.h"
 
 @implementation lockeAppDelegate
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
+@synthesize window = _window;
+@synthesize tabBarController = _tabBarController;
+@synthesize managedObjContext = _managedObjContext;
+@synthesize managedObjModel = _managedObjModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+/*
+- (void)dealloc
+{
+    [_window release];
+    [_tabBarController release];
+    [super dealloc];
+}
+*/
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.tag = 0;
+    
+    BilateralTableViewController *bilateral = [[BilateralTableViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    FirstViewController *firstViewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    MetionsStatusesVC *m = [[MetionsStatusesVC alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    //ZJTProfileViewController *profile = [[[ZJTProfileViewController alloc] initWithNibName:@"ZJTProfileViewController" bundle:nil] autorelease ];
+    //FollowAndFansVC *followingVC = [[[FollowAndFansVC alloc] initWithNibName:@"FollowAndFansVC" bundle:nil] autorelease];
+    SettingVC *settingVC = [[SettingVC alloc] initWithNibName:@"SettingVC" bundle:nil];
+    
+    //followingVC.title = @"好友";
+    m.title = @"消息";
+    //profile.title = @"我的账户";
+    bilateral.title = @"朋友圈";
+    firstViewController.title = @"关注";
+    
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:bilateral];
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:m];
+    //  UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:followingVC] autorelease];
+    //UINavigationController *nav4 = [[[UINavigationController alloc] initWithRootViewController:profile] autorelease];
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:settingVC];
+    
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:nav1, nav2, nav3, nav4,nil];
+    //    self.tabBarController.selectedIndex = 2;
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -71,28 +116,28 @@
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
 - (NSManagedObjectContext *)managedObjectContext
 {
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
+    if (_managedObjContext != nil) {
+        return _managedObjContext;
     }
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+        _managedObjContext = [[NSManagedObjectContext alloc] init];
+       // [NSManagedObjectContext setPersistentStoreCoordinator:coordinator];
     }
-    return _managedObjectContext;
+    return _managedObjContext;
 }
 
 // Returns the managed object model for the application.
 // If the model doesn't already exist, it is created from the application's model.
 - (NSManagedObjectModel *)managedObjectModel
 {
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
+    if (_managedObjModel != nil) {
+        return _managedObjModel;
     }
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"_______" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
+    _managedObjModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjModel;
 }
 
 // Returns the persistent store coordinator for the application.
