@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1330B5418B0A3AC00300BEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5318B0A3AC00300BEB /* Foundation.framework */; };
+		F1330B5618B0A3AC00300BEB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */; };
+		F1330B5818B0A3AC00300BEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5718B0A3AC00300BEB /* UIKit.framework */; };
+		F1330B5A18B0A3AC00300BEB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5918B0A3AC00300BEB /* CoreData.framework */; };
+		F1330B6018B0A3AC00300BEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1330B5E18B0A3AC00300BEB /* InfoPlist.strings */; };
+		F1330B6218B0A3AC00300BEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1330B6118B0A3AC00300BEB /* main.m */; };
+		F1330B6618B0A3AC00300BEB /* lockeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1330B6518B0A3AC00300BEB /* lockeAppDelegate.m */; };
+		F1330B6918B0A3AC00300BEB /* _______.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1330B6718B0A3AC00300BEB /* _______.xcdatamodeld */; };
+		F1330B6B18B0A3AC00300BEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1330B6A18B0A3AC00300BEB /* Images.xcassets */; };
+		F1330B7218B0A3AC00300BEB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B7118B0A3AC00300BEB /* XCTest.framework */; };
+		F1330B7318B0A3AC00300BEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5318B0A3AC00300BEB /* Foundation.framework */; };
+		F1330B7418B0A3AC00300BEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5718B0A3AC00300BEB /* UIKit.framework */; };
+		F1330B7518B0A3AC00300BEB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5918B0A3AC00300BEB /* CoreData.framework */; };
+		F1330B7D18B0A3AC00300BEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1330B7B18B0A3AC00300BEB /* InfoPlist.strings */; };
+		F1330B7F18B0A3AC00300BEB /* _______Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1330B7E18B0A3AC00300BEB /* _______Tests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1330B7618B0A3AC00300BEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1330B4818B0A3AC00300BEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1330B4F18B0A3AC00300BEB;
+			remoteInfo = "友友微博客户端";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1330B5018B0A3AC00300BEB /* 友友微博客户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "友友微博客户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1330B5318B0A3AC00300BEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F1330B5718B0A3AC00300BEB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F1330B5918B0A3AC00300BEB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F1330B5D18B0A3AC00300BEB /* 友友微博客户端-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "友友微博客户端-Info.plist"; sourceTree = "<group>"; };
+		F1330B5F18B0A3AC00300BEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F1330B6118B0A3AC00300BEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F1330B6318B0A3AC00300BEB /* 友友微博客户端-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "友友微博客户端-Prefix.pch"; sourceTree = "<group>"; };
+		F1330B6418B0A3AC00300BEB /* lockeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lockeAppDelegate.h; sourceTree = "<group>"; };
+		F1330B6518B0A3AC00300BEB /* lockeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lockeAppDelegate.m; sourceTree = "<group>"; };
+		F1330B6818B0A3AC00300BEB /* _______.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "_______.xcdatamodel"; sourceTree = "<group>"; };
+		F1330B6A18B0A3AC00300BEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1330B7018B0A3AC00300BEB /* 友友微博客户端Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "友友微博客户端Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1330B7118B0A3AC00300BEB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F1330B7A18B0A3AC00300BEB /* 友友微博客户端Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "友友微博客户端Tests-Info.plist"; sourceTree = "<group>"; };
+		F1330B7C18B0A3AC00300BEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F1330B7E18B0A3AC00300BEB /* _______Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_______Tests.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1330B4D18B0A3AC00300BEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1330B5618B0A3AC00300BEB /* CoreGraphics.framework in Frameworks */,
+				F1330B5A18B0A3AC00300BEB /* CoreData.framework in Frameworks */,
+				F1330B5818B0A3AC00300BEB /* UIKit.framework in Frameworks */,
+				F1330B5418B0A3AC00300BEB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1330B6D18B0A3AC00300BEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1330B7218B0A3AC00300BEB /* XCTest.framework in Frameworks */,
+				F1330B7518B0A3AC00300BEB /* CoreData.framework in Frameworks */,
+				F1330B7418B0A3AC00300BEB /* UIKit.framework in Frameworks */,
+				F1330B7318B0A3AC00300BEB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1330B4718B0A3AC00300BEB = {
+			isa = PBXGroup;
+			children = (
+				F1330B5B18B0A3AC00300BEB /* 友友微博客户端 */,
+				F1330B7818B0A3AC00300BEB /* 友友微博客户端Tests */,
+				F1330B5218B0A3AC00300BEB /* Frameworks */,
+				F1330B5118B0A3AC00300BEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1330B5118B0A3AC00300BEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1330B5018B0A3AC00300BEB /* 友友微博客户端.app */,
+				F1330B7018B0A3AC00300BEB /* 友友微博客户端Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1330B5218B0A3AC00300BEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1330B5318B0A3AC00300BEB /* Foundation.framework */,
+				F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */,
+				F1330B5718B0A3AC00300BEB /* UIKit.framework */,
+				F1330B5918B0A3AC00300BEB /* CoreData.framework */,
+				F1330B7118B0A3AC00300BEB /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1330B5B18B0A3AC00300BEB /* 友友微博客户端 */ = {
+			isa = PBXGroup;
+			children = (
+				F1330B6418B0A3AC00300BEB /* lockeAppDelegate.h */,
+				F1330B6518B0A3AC00300BEB /* lockeAppDelegate.m */,
+				F1330B6A18B0A3AC00300BEB /* Images.xcassets */,
+				F1330B6718B0A3AC00300BEB /* _______.xcdatamodeld */,
+				F1330B5C18B0A3AC00300BEB /* Supporting Files */,
+			);
+			path = "友友微博客户端";
+			sourceTree = "<group>";
+		};
+		F1330B5C18B0A3AC00300BEB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1330B5D18B0A3AC00300BEB /* 友友微博客户端-Info.plist */,
+				F1330B5E18B0A3AC00300BEB /* InfoPlist.strings */,
+				F1330B6118B0A3AC00300BEB /* main.m */,
+				F1330B6318B0A3AC00300BEB /* 友友微博客户端-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1330B7818B0A3AC00300BEB /* 友友微博客户端Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F1330B7E18B0A3AC00300BEB /* _______Tests.m */,
+				F1330B7918B0A3AC00300BEB /* Supporting Files */,
+			);
+			path = "友友微博客户端Tests";
+			sourceTree = "<group>";
+		};
+		F1330B7918B0A3AC00300BEB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1330B7A18B0A3AC00300BEB /* 友友微博客户端Tests-Info.plist */,
+				F1330B7B18B0A3AC00300BEB /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1330B4F18B0A3AC00300BEB /* 友友微博客户端 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1330B8218B0A3AC00300BEB /* Build configuration list for PBXNativeTarget "友友微博客户端" */;
+			buildPhases = (
+				F1330B4C18B0A3AC00300BEB /* Sources */,
+				F1330B4D18B0A3AC00300BEB /* Frameworks */,
+				F1330B4E18B0A3AC00300BEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "友友微博客户端";
+			productName = "友友微博客户端";
+			productReference = F1330B5018B0A3AC00300BEB /* 友友微博客户端.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1330B6F18B0A3AC00300BEB /* 友友微博客户端Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1330B8518B0A3AC00300BEB /* Build configuration list for PBXNativeTarget "友友微博客户端Tests" */;
+			buildPhases = (
+				F1330B6C18B0A3AC00300BEB /* Sources */,
+				F1330B6D18B0A3AC00300BEB /* Frameworks */,
+				F1330B6E18B0A3AC00300BEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1330B7718B0A3AC00300BEB /* PBXTargetDependency */,
+			);
+			name = "友友微博客户端Tests";
+			productName = "友友微博客户端Tests";
+			productReference = F1330B7018B0A3AC00300BEB /* 友友微博客户端Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1330B4818B0A3AC00300BEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = locke;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Locke Jiang";
+				TargetAttributes = {
+					F1330B6F18B0A3AC00300BEB = {
+						TestTargetID = F1330B4F18B0A3AC00300BEB;
+					};
+				};
+			};
+			buildConfigurationList = F1330B4B18B0A3AC00300BEB /* Build configuration list for PBXProject "友友微博客户端" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F1330B4718B0A3AC00300BEB;
+			productRefGroup = F1330B5118B0A3AC00300BEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1330B4F18B0A3AC00300BEB /* 友友微博客户端 */,
+				F1330B6F18B0A3AC00300BEB /* 友友微博客户端Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1330B4E18B0A3AC00300BEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1330B6018B0A3AC00300BEB /* InfoPlist.strings in Resources */,
+				F1330B6B18B0A3AC00300BEB /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1330B6E18B0A3AC00300BEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1330B7D18B0A3AC00300BEB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1330B4C18B0A3AC00300BEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1330B6918B0A3AC00300BEB /* _______.xcdatamodeld in Sources */,
+				F1330B6218B0A3AC00300BEB /* main.m in Sources */,
+				F1330B6618B0A3AC00300BEB /* lockeAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1330B6C18B0A3AC00300BEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1330B7F18B0A3AC00300BEB /* _______Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1330B7718B0A3AC00300BEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1330B4F18B0A3AC00300BEB /* 友友微博客户端 */;
+			targetProxy = F1330B7618B0A3AC00300BEB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1330B5E18B0A3AC00300BEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1330B5F18B0A3AC00300BEB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F1330B7B18B0A3AC00300BEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1330B7C18B0A3AC00300BEB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1330B8018B0A3AC00300BEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F1330B8118B0A3AC00300BEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1330B8318B0A3AC00300BEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "友友微博客户端/友友微博客户端-Prefix.pch";
+				INFOPLIST_FILE = "友友微博客户端/友友微博客户端-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F1330B8418B0A3AC00300BEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "友友微博客户端/友友微博客户端-Prefix.pch";
+				INFOPLIST_FILE = "友友微博客户端/友友微博客户端-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F1330B8618B0A3AC00300BEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/友友微博客户端.app/友友微博客户端";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "友友微博客户端/友友微博客户端-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "友友微博客户端Tests/友友微博客户端Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F1330B8718B0A3AC00300BEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/友友微博客户端.app/友友微博客户端";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "友友微博客户端/友友微博客户端-Prefix.pch";
+				INFOPLIST_FILE = "友友微博客户端Tests/友友微博客户端Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1330B4B18B0A3AC00300BEB /* Build configuration list for PBXProject "友友微博客户端" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1330B8018B0A3AC00300BEB /* Debug */,
+				F1330B8118B0A3AC00300BEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1330B8218B0A3AC00300BEB /* Build configuration list for PBXNativeTarget "友友微博客户端" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1330B8318B0A3AC00300BEB /* Debug */,
+				F1330B8418B0A3AC00300BEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1330B8518B0A3AC00300BEB /* Build configuration list for PBXNativeTarget "友友微博客户端Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1330B8618B0A3AC00300BEB /* Debug */,
+				F1330B8718B0A3AC00300BEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F1330B6718B0A3AC00300BEB /* _______.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F1330B6818B0A3AC00300BEB /* _______.xcdatamodel */,
+			);
+			currentVersion = F1330B6818B0A3AC00300BEB /* _______.xcdatamodel */;
+			path = "_______.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F1330B4818B0A3AC00300BEB /* Project object */;
+}
