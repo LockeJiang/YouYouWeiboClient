@@ -96,8 +96,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(dismiss)         name:@"tapClicked"              object:nil];
     aScrollView.zoomScale = 1.0;
     [imageView setImage:image];
-    [self zoomToFit];
-    if (bigImageURL!=nil) 
+    
+    //解决图片未load完毕时点击卡死和crash的问题。
+    if (imageView.image) {
+        [self zoomToFit];
+    }
+    if (bigImageURL!=nil)
     {
         [[HHNetDataCacheManager getInstance] getDataWithURL:bigImageURL];
     }
