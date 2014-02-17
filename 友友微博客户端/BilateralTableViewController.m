@@ -63,7 +63,8 @@
        // dispatch_release(readQueue);
     });
     
-    NSLog(@"bilateralTableViewController: getDataFromCD");
+    NSLog(@"bilateralTableViewController: getDataFromCD: statuesArr Count:%i", statuesArr.count);
+
 }
 
 - (void)viewDidLoad
@@ -89,7 +90,8 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
-    NSLog(@"bilateralTableViewController: viewDidLoad");
+    NSLog(@"bilateralTableViewController: viewDidLoad: statuesArr Count:%i", statuesArr.count);
+
 }
 
 -(void)viewDidUnload
@@ -110,13 +112,15 @@
         [self.tableView reloadData];
         NSLog(@"bilateralTableViewController: viewWillAppear: shouldload");
    }
-   NSLog(@"bilateralTableViewController: viewWillAppear: not shouldload");
+    NSLog(@"bilateralTableViewController: viewWillAppear: not shouldload: statuesArr Count:%i", statuesArr.count);
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    NSLog(@"bilateralTableViewController: viewWillDisappear");
+    NSLog(@"bilateralTableViewController: viewWillDisappear: statuesArr Count:%i", statuesArr.count);
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -148,7 +152,7 @@
         }
         
     }
-    NSLog(@"bilateralTableViewController: ViewDidAppear");
+    NSLog(@"bilateralTableViewController: ViewDidAppear: statuesArr Count:%i", statuesArr.count);
 }
 
 #pragma mark - Methods
@@ -231,7 +235,8 @@
         self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
     }
     
-    NSLog(@"bilateralTableViewController: didGetPublicTimeLine");
+    NSLog(@"bilateralTableViewController: didGetPublicTimeLine: statuesArr Count:%i", statuesArr.count);
+
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{

@@ -5,7 +5,7 @@
 //  Created by Jianting Zhu on 12-4-25.
 //  Copyright (c) 2012年 ZUST. All rights reserved.
 //
-
+#import "ZJTProfileViewController.h"
 #import "SettingVC.h"
 #import "OAuthWebView.h"
 #import "WeiBoMessageManager.h"
@@ -15,10 +15,12 @@
 #import "MetionsStatusesVC.h"
 #import "CoreDataManager.h"
 #import "HotTrendsVC.h"
+#import "ZJTHelpler.h"
+#import "NearbyStatusViewController.h"
 
 //sections
 enum{
-    kStatusSection = 0,
+    kDiscoverSection = 0,
     kAccountSection,
     kSectionsCount,
 };
@@ -27,9 +29,9 @@ enum{
 
 //status
 enum{
-    kHotStatus = 0,
-    kHotRetwitted,
-    kHotTrends,
+    kNearbyStatus = 0,
+    kHotApps,
+    kHotGames,
 //    kMetionsStatuses,
     kStatusRowsCount,
 };
@@ -37,8 +39,8 @@ enum{
 //kAccountSection
 enum {
     kCurrentUser = 0,
-    kChangeAccount,  
-    kCleanCache,
+    kFollowAndFans,
+    kQuitAccount,
     kAboutMe,
     kAccountRowsCount,
 };
@@ -50,13 +52,12 @@ enum {
 @implementation SettingVC
 
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"更多...";
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.title = @"发现";
+        self.tabBarItem.image = [UIImage imageNamed:@"second"];
         
     }
     return self;
@@ -75,6 +76,13 @@ enum {
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
+    
+    //解决tableview被导航栏遮挡的问题
+    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -109,7 +117,7 @@ enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == kStatusSection) {
+    if (section == kDiscoverSection) {
         return kStatusRowsCount;
     }
     else if (section == kAccountSection) {
@@ -135,33 +143,33 @@ enum {
     if (section == kAccountSection) {
         if (row == kCurrentUser) {
             NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_NAME];
-            cell.textLabel.text = [NSString stringWithFormat:@"当前登陆账号：%@",name];
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = [NSString stringWithFormat:@"我的账号：%@",name];
+            //cell.accessoryType = UITableViewCellAccessoryNone;
         }
-        else if (row == kChangeAccount) {
-            cell.textLabel.text = @"更换账号";
+        else if (row == kQuitAccount) {
+            cell.textLabel.text = @"退出账号";
         }
         
-        else if (row == kCleanCache) {
-            cell.textLabel.text = @"清空缓存";
+        else if (row == kFollowAndFans) {
+            cell.textLabel.text = @"关注 | 粉丝";
         }
         
         else if (row == kAboutMe) {
-            cell.textLabel.text = @"关于";
+            cell.textLabel.text = @"关于友友微博";
         }
     }
     
-    else if (section == kStatusSection) {
-        if (row == kHotStatus) {
-            cell.textLabel.text = @"今日热门评论";
+    else if (section == kDiscoverSection) {
+        if (row == kNearbyStatus) {
+            cell.textLabel.text = @"附近的微博";
         }
         
-        else if (row == kHotRetwitted) {
-            cell.textLabel.text = @"今日热门转发";
+        else if (row == kHotApps) {
+            cell.textLabel.text = @"热门应用";
         }
         
-        else if (row == kHotTrends) {
-            cell.textLabel.text = @"今日热门话题";
+        else if (row == kHotGames) {
+            cell.textLabel.text = @"热门游戏";
         }
         
 //        else if (row == kMetionsStatuses) {
@@ -176,7 +184,7 @@ enum {
     OAuthWebView *webV = [[OAuthWebView alloc]initWithNibName:@"OAuthWebView" bundle:nil];
     webV.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webV animated:YES];
-  //  [webV release];
+   // [webV release];
 }
 
 -(void)didGetUserInfo:(NSNotification*)sender
@@ -199,21 +207,29 @@ enum {
     
     if (section == kAccountSection ) {
         if (row == kCurrentUser) {
-            
+            ZJTProfileViewController *p = [[ZJTProfileViewController alloc] initWithNibName:@"ZJTProfileViewController" bundle:nil];
+            p.hidesBottomBarWhenPushed = YES;
+            p.screenName = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_USER_NAME];
+            NSLog(@"SettingVC:  did get user:%@", p.screenName);
+            [self.navigationController pushViewController:p animated:YES];
+        //    [p release];
         }
         
-        else if (row == kChangeAccount) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要更换账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"更换", nil];
+        else if (row == kQuitAccount) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要退出账号吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"退出", nil];
             alert.tag = 0;
             [alert show];
-           // [alert release];
+       //     [alert release];
         }
         
-        else if (row == kCleanCache) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要清空缓存吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"清空", nil];
-            alert.tag = 1;
-            [alert show];
-           // [alert release];
+        else if (row == kFollowAndFans) {
+            FollowAndFansVC *b = [[FollowAndFansVC alloc] initWithNibName:@"FollowAndFansVC" bundle:nil];
+            b.hidesBottomBarWhenPushed = YES;
+            //b.edgesForExtendedLayout = UIRectEdgeNone;
+            //b.extendedLayoutIncludesOpaqueBars = NO;
+            //b.modalPresentationCapturesStatusBarAppearance = NO;
+            [self.navigationController pushViewController:b animated:YES];
+          //  [b release];
         }
         
         else if (row == kAboutMe) {
@@ -224,26 +240,26 @@ enum {
         }
     }
     
-    else if (section == kStatusSection) {
-        if (row == kHotStatus) {        
-            ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotCommentDaily];
-            h.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:h animated:YES];
-         //   [h release];
+    else if (section == kDiscoverSection) {
+        if (row == kNearbyStatus) {        
+            NearbyStatusViewController  *X = [[NearbyStatusViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+            X.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:X animated:YES];
+         //   [X release];
         }
         
-        else if (row == kHotRetwitted) {
+        else if (row == kHotApps) {
             ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotRepostDaily];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
          //   [h release];
         }
         
-        else if (row == kHotTrends) {
+        else if (row == kHotGames) {
             HotTrendsVC *h = [[HotTrendsVC alloc] initWithStyle:UITableViewStylePlain];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
-         //   [h release];
+        //    [h release];
         }
         
 //        else if (row == kMetionsStatuses) {

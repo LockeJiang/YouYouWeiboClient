@@ -263,6 +263,7 @@ static WeiBoMessageManager * instance=nil;
 -(void)didGetPublicTimeLine:(NSArray *)statusArr
 {
     if (statusArr == nil || [statusArr count] == 0) {
+        NSLog(@"WeiBoMessageManager: didGetPublicTimeLine: statueArr Count:%i", statusArr.count);
         return;
     }
     NSNotification *notification = [NSNotification notificationWithName:MMSinaGotPublicTimeLine object:statusArr];

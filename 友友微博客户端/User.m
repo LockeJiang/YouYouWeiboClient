@@ -22,6 +22,7 @@
 @synthesize favoritesCount;
 @synthesize createdAt;
 @synthesize following;
+@synthesize follow_me;
 @synthesize verified;
 @synthesize allowAllActMsg;
 @synthesize geoEnabled;
@@ -42,6 +43,7 @@
     us.followersCount       = [NSNumber numberWithInt:self.followersCount];
     us.favoritesCount       = [NSNumber numberWithInt:self.favoritesCount];
     us.following            = [NSNumber numberWithBool:self.following];
+    us.follow_me            = [NSNumber numberWithBool:self.follow_me];
     us.friendsCount         = [NSNumber numberWithInt:self.friendsCount];
     us.gender               = [NSNumber numberWithInt:self.gender];
     us.geoEnabled           = [NSNumber numberWithBool:self.geoEnabled];
@@ -73,7 +75,8 @@
     self.domain = us.domain;              
     self.followersCount = us.followersCount.intValue;
     self.followersCount = us.favoritesCount.intValue;
-    self.following = us.following.boolValue;           
+    self.following = us.following.boolValue;
+    self.follow_me = us.follow_me.boolValue;
     self.friendsCount = us.friendsCount.intValue;       
     self.gender = us.gender.intValue;              
     self.geoEnabled = us.geoEnabled.boolValue;        
@@ -105,18 +108,6 @@
 - (void)updateWithJSonDictionary:(NSDictionary*)dic
 {
     self.avatarImage = nil;
-    /*
-	[userKey release];
-    [screenName release];
-    [name release];
-	[province release];
-	[city release];
-    [location release];
-    [description release];
-    [url release];
-    [profileImageUrl release];
-	[domain release];
-    */
     
     userId          = [[dic objectForKey:@"id"] longLongValue];
     userKey			= [[NSNumber alloc] initWithLongLong:userId];
@@ -153,6 +144,7 @@
     favoritesCount  = ([dic objectForKey:@"favourites_count"]  == [NSNull null]) ? 0 : [[dic objectForKey:@"favourites_count"] longValue];
 
     following       = ([dic objectForKey:@"following"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"following"] boolValue];
+    follow_me       = ([dic objectForKey:@"follow_me"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"follow_me"] boolValue];
     verified		= ([dic objectForKey:@"verified"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"verified"] boolValue];
     allowAllActMsg	= ([dic objectForKey:@"allow_all_act_msg"]       == [NSNull null]) ? 0 : [[dic objectForKey:@"allow_all_act_msg"] boolValue];  
     geoEnabled		= ([dic objectForKey:@"geo_enabled"]   == [NSNull null]) ? 0 : [[dic objectForKey:@"geo_enabled"] boolValue];
@@ -173,18 +165,9 @@
     if ((id)profileImageUrl == [NSNull null]) profileImageUrl = @"";
     if ((id)domain == [NSNull null]) domain = @"";
     
-    /*
-    [screenName retain];
-    [name retain];
-	[province retain];
-	[city retain];
-    location = [[location unescapeHTML] retain];
-    description = [[description unescapeHTML] retain];
-    [url retain];
-    [profileImageUrl retain];
-	[domain retain];
-	profileLargeImageUrl = [[profileImageUrl stringByReplacingOccurrencesOfString:@"/50/" withString:@"/180/"] retain];
-     */
+    location = [location unescapeHTML];
+    description = [description unescapeHTML] ;
+	profileLargeImageUrl = [profileImageUrl stringByReplacingOccurrencesOfString:@"/50/" withString:@"/180/"];
 }
 
 
@@ -196,29 +179,6 @@
     u = [[User alloc] initWithJsonDictionary:dic];
     return u;
 }
-
-/*
-- (void)dealloc
-{
-    [pinyin release];
-    [verifiedReason release];
-    [cellIndexPath release];
-	[userKey release];
-    [screenName release];
-    [name release];
-	[province release];
-	[city release];
-    [location release];
-    [description release];
-    [url release];
-    [profileImageUrl release];
-	[profileLargeImageUrl release];
-	[domain release];
-   	[super dealloc];
-}
-*/
-
-
 
 
 @end

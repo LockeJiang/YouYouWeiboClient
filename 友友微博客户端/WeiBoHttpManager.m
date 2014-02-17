@@ -989,7 +989,7 @@
             //微博过滤代码可行接入点：1，未生效：首页未生效
            // if (!sts.user.follow_me) {
                 [statuesArr addObject:sts];
-            //}
+           // }
         }
         if ([delegate respondsToSelector:@selector(didGetPublicTimeLine:)]) {
             [delegate didGetPublicTimeLine:statuesArr];
@@ -1197,9 +1197,9 @@
         for (id item in arr) {
             Status* sts = [Status statusWithJsonDictionary:item];
             //  微博过滤点2:生效！
-          //  if (!sts.user.follow_me) {
+            if (!sts.user.follow_me) {
                 [statuesArr addObject:sts];
-          //  }
+            }
         }
         NSString *isRefresh = [userInformation objectForKey:@"isRefresh"];
         if ([isRefresh isEqualToString:@"YES"]) {

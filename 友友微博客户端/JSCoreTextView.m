@@ -38,18 +38,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AHHyperlinkScanner.h"
 
-#import <Availability.h>
-
-#ifndef __IPHONE_5_0
-#warning "This project uses features only available in iOS SDK 5.0 and later."
-#endif
-
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#endif
-
 float const yAdjustmentFactor = 1.3;
 
 @interface JSCoreTextView ()
@@ -152,7 +140,7 @@ float const yAdjustmentFactor = 1.3;
     self.highlightedLinkColor = [UIColor blueColor];
     self.highlightColor = [UIColor grayColor];
     
-    UILongPressGestureRecognizer *longPressHandler = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)] ;
+    UILongPressGestureRecognizer *longPressHandler = [[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)] autorelease];
     [self addGestureRecognizer:longPressHandler];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -161,12 +149,42 @@ float const yAdjustmentFactor = 1.3;
                                                object:nil];
 }
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	self.text = nil;
+	
+	self.textColor = nil;
+	self.linkColor = nil;
+	self.highlightedLinkColor = nil;
+	self.highlightColor = nil;
+	
+	self.backgroundImage = nil;
+	
+	[_links release], _links = nil;
+	
+	if (_framesetter)
+	{
+		CFRelease(_framesetter);
+		_framesetter = NULL;
+	}
+	
+	if (_frame)
+	{
+		CFRelease(_frame);
+		_frame = NULL;
+	}
+	
+	[super dealloc];
+}
+
 #pragma mark -
 #pragma mark Properties
 
 - (void)setText:(NSString *)text
 {
-	//[_text release];
+	[_text release];
 	_text = [text copy];
 	
 	[self detectLinks];
@@ -183,7 +201,7 @@ float const yAdjustmentFactor = 1.3;
 
 - (void)setFontName:(NSString *)fontName
 {
-	//[_fontName release];
+	[_fontName release];
 	_fontName = [fontName copy];
 	
 	[self setNeedsDisplay];
@@ -212,8 +230,8 @@ float const yAdjustmentFactor = 1.3;
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage
 {
-	//[_backgroundImage release];
-	_backgroundImage = backgroundImage;
+	[_backgroundImage release];
+	_backgroundImage = [backgroundImage retain];
 	
 	[self setNeedsDisplay];
 }
@@ -235,32 +253,32 @@ float const yAdjustmentFactor = 1.3;
 
 - (void)setTextColor:(UIColor *)textColor
 {
-	//[_textColor release];
-	_textColor = textColor;
+	[_textColor release];
+	_textColor = [textColor retain];
 	
 	[self setNeedsDisplay];
 }
 
 - (void)setLinkColor:(UIColor *)linkColor
 {
-	//[_linkColor release];
-	_linkColor = linkColor;
+	[_linkColor release];
+	_linkColor = [linkColor retain];
 	
 	[self setNeedsDisplay];
 }
 
 - (void)setHighlightedLinkColor:(UIColor *)highlightedLinkColor
 {
-	//[_highlightedLinkColor release];
-	_highlightedLinkColor = highlightedLinkColor;
+	[_highlightedLinkColor release];
+	_highlightedLinkColor = [highlightedLinkColor retain];
 	
 	[self setNeedsDisplay];
 }
 
 - (void)setHighlightColor:(UIColor *)highlightColor
 {
-	//[_highlightColor release];
-	_highlightColor = highlightColor;
+	[_highlightColor release];
+	_highlightColor = [highlightColor retain];
 	
 	[self setNeedsDisplay];
 }
@@ -272,7 +290,7 @@ float const yAdjustmentFactor = 1.3;
 {
 	if (_links)
 	{
-	//	[_links release];
+		[_links release];
 	}
 	
 	AHHyperlinkScanner *scanner = [AHHyperlinkScanner hyperlinkScannerWithString:self.text];
@@ -385,7 +403,7 @@ float const yAdjustmentFactor = 1.3;
 	{
 		if ([self.delegate respondsToSelector:@selector(textView:linkTapped:)])
 		{
-			[self.delegate textView:self linkTapped:_touchedLink];
+			[self.delegate textView:self linkTapped:[[_touchedLink retain] autorelease]];
 		}
 	}
     else
@@ -410,8 +428,8 @@ float const yAdjustmentFactor = 1.3;
 		{
 			_linkToCopy = _touchedLink;
 			
-			UIMenuItem *copyLink = [[UIMenuItem alloc] initWithTitle:@"Copy Link"
-															   action:@selector(copyLink:)];
+			UIMenuItem *copyLink = [[[UIMenuItem alloc] initWithTitle:@"Copy Link"
+															   action:@selector(copyLink:)] autorelease];
 			[[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObject:copyLink]];
 			[[UIMenuController sharedMenuController] setTargetRect:CGRectMake(_linkLocation.x, _linkLocation.y - 10, 1, 1) inView:self];
 		}
