@@ -89,7 +89,7 @@ static ZJTStatusBarAlertWindow *instance = nil;
     _window = [[UIWindow alloc]initWithFrame:CGRectMake(0, -20, 320, 20)];
     _window.tag = 1;
     _window.windowLevel = UIWindowLevelAlert;
-    _window.backgroundColor = [UIColor blackColor];
+    _window.backgroundColor = [UIColor whiteColor];
     
     //backgroundImage
     self.backgroundImage = [[UIImage imageNamed:@"statusbar_background.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:0]; 

@@ -175,7 +175,9 @@
 {
     for (int i = 0; i < statuesArr.count; i++) {
         NSLog(@"i = %d",i);
-        [[CoreDataManager getInstance] insertStatusesToCD:[statuesArr objectAtIndex:i] index:i isHomeLine:YES];
+        if ([statuesArr objectAtIndex:i] ) {
+            [[CoreDataManager getInstance] insertStatusesToCD:[statuesArr objectAtIndex:i] index:i isHomeLine:YES];
+        }
     }
     NSLog(@"FirstViewController: appWillResign");
 }

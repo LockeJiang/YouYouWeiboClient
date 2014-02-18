@@ -90,6 +90,10 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
+    
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
+    
     NSLog(@"bilateralTableViewController: viewDidLoad: statuesArr Count:%i", statuesArr.count);
 
 }
@@ -103,7 +107,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
    if (shouldLoad)
     {
         shouldLoad = NO;
@@ -112,6 +115,10 @@
         [self.tableView reloadData];
         NSLog(@"bilateralTableViewController: viewWillAppear: shouldload");
    }
+    [super viewWillAppear:animated];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view setAlpha:1];
+    }];
     NSLog(@"bilateralTableViewController: viewWillAppear: not shouldload: statuesArr Count:%i", statuesArr.count);
 
 }
@@ -119,6 +126,9 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view setAlpha:0];
+    }];
     NSLog(@"bilateralTableViewController: viewWillDisappear: statuesArr Count:%i", statuesArr.count);
 
 }

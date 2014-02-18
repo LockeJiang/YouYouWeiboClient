@@ -359,6 +359,8 @@ enum  {
 {
     //博文Text
     CGRect frame;
+    CGSize size = CGSizeMake(1, 1);
+    float zoom = 1;
     [self adjustTheHeightOf:self.JSContentTF withText:self.JSContentTF.text];
     
     //转发博文Text
@@ -374,43 +376,50 @@ enum  {
     
     //转发的图片
     //origin
-    frame = retwitterImageV.frame;
-    frame.origin.y = self.JSRetitterContentTF.frame.size.height + 8;
-    CGSize size = [self getFrameOfImageView:retwitterImageV].size;
-    
-    float zoom = 2 * size.width > size.height ? 250.0/size.width : 300.0/size.height;
-    size = CGSizeMake(size.width * zoom, size.height * zoom);
-    
-    frame.size = size;
-    retwitterImageV.frame = frame;
-    retwitterImageV.center = CGPointMake(160, retwitterImageV.center.y);
-    frame = retwitterImageV.frame;
-    retwitterImageBackground.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);
+    if (_hasImage) {
+        frame = retwitterImageV.frame;
+        frame.origin.y = self.JSRetitterContentTF.frame.size.height + 8;
+        size = [self getFrameOfImageView:retwitterImageV].size;
+        
+        zoom = 2 * size.width > size.height ? 250.0/size.width : 300.0/size.height;
+        size = CGSizeMake(size.width * zoom, size.height * zoom);
+        
+        frame.size = size;
+        retwitterImageV.frame = frame;
+        retwitterImageV.center = CGPointMake(160, retwitterImageV.center.y);
+        frame = retwitterImageV.frame;
+        retwitterImageBackground.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);
+    }
+
     
     //正文的图片
     //origin
-    frame = contentImageV.frame;
-    frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + 8.0f;
-    size = [self getFrameOfImageView:contentImageV].size;
-    
-    zoom = size.width > size.height ? 250.0/size.width : 250.0/size.height;
-    size = CGSizeMake(size.width * zoom, size.height * zoom);
-    
-    frame.size = size;
-    contentImageV.frame = frame;
-    contentImageV.center = CGPointMake(160, contentImageV.center.y);
-    frame = contentImageV.frame;
-    contentImageBackgroundView.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);;
-    
+    if (_haveRetwitterImage) {
+        frame = contentImageV.frame;
+        frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + 8.0f;
+        size = [self getFrameOfImageView:contentImageV].size;
+        
+        zoom = size.width > size.height ? 250.0/size.width : 250.0/size.height;
+        size = CGSizeMake(size.width * zoom, size.height * zoom);
+        
+        frame.size = size;
+        contentImageV.frame = frame;
+        contentImageV.center = CGPointMake(160, contentImageV.center.y);
+        frame = contentImageV.frame;
+        contentImageBackgroundView.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);;
+    }
+  
+    if (_hasRetwitter) {
+        frame = retwitterMainV.frame;
+        //size
+        if (_haveRetwitterImage)    frame.size.height = self.JSRetitterContentTF.frame.size.height + retwitterImageBackground.frame.size.height + 18;
+        else                        frame.size.height = self.JSRetitterContentTF.frame.size.height + 10;
+        //origin
+        if(_hasImage)               frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + contentImageBackgroundView.frame.size.height + 18;
+        else                        frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y ;
+        retwitterMainV.frame = frame;
+    }
     //转发的主View
-    frame = retwitterMainV.frame;
-    //size
-    if (_haveRetwitterImage)    frame.size.height = self.JSRetitterContentTF.frame.size.height + retwitterImageBackground.frame.size.height + 18;
-    else                        frame.size.height = self.JSRetitterContentTF.frame.size.height + 10;
-    //origin
-    if(_hasImage)               frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + contentImageBackgroundView.frame.size.height + 18;
-    else                        frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y ;
-    retwitterMainV.frame = frame;
     
     //headerView
     frame = headerView.frame;
