@@ -63,6 +63,9 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:nav1, nav2, nav3, nav4,nil];
     //    self.tabBarController.selectedIndex = 2;
     self.window.rootViewController = self.tabBarController;
+    
+    self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.opaque = NO;
     [self.window makeKeyAndVisible];
     
     return YES;

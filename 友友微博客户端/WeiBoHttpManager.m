@@ -667,25 +667,6 @@
    // [request release];
 }
 
-//转发一条微博
--(void)repost:(NSString*)weiboID content:(NSString*)content withComment:(int)isComment
-{
-    //https://api.weibo.com/2/statuses/repost.json
-    NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/2/statuses/repost.json"];
-    ASIFormDataRequest *item = [[ASIFormDataRequest alloc] initWithURL:url];
-    self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
-    NSString *sts =[NSString stringWithFormat:@"%d",isComment];
-    
-    [item setPostValue:authToken    forKey:@"access_token"];
-    [item setPostValue:content      forKey:@"status"];
-    [item setPostValue:weiboID      forKey:@"id"];
-    [item setPostValue:sts          forKey:@"is_comment"];
-    
-    [self setPostUserInfo:item withRequestType:SinaRepost];
-    [requestQueue addOperation:item];
-  //  [item release];
-}
-
 //按天返回热门微博转发榜的微博列表
 -(void)getHotRepostDaily:(int)count
 {
@@ -873,6 +854,26 @@
    // [request release];
 }
 
+//转发一条微博
+-(void)repost:(NSString*)weiboID content:(NSString*)content withComment:(int)isComment
+{
+    //https://api.weibo.com/2/statuses/repost.json
+    NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/2/statuses/repost.json"];
+    ASIFormDataRequest *item = [[ASIFormDataRequest alloc] initWithURL:url];
+    self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
+    NSString *sts =[NSString stringWithFormat:@"%d",isComment];
+    
+    [item setPostValue:authToken    forKey:@"access_token"];
+    [item setPostValue:content      forKey:@"status"];
+    [item setPostValue:weiboID      forKey:@"id"];
+    [item setPostValue:sts          forKey:@"is_comment"];
+    
+    [self setPostUserInfo:item withRequestType:SinaRepost];
+    [requestQueue addOperation:item];
+    //  [item release];
+    NSLog(@"WeiboHttpManager: repost: weiboID :%@; isComment: %d", weiboID, isComment);
+}
+
 //回复一条评论
 -(void)replyACommentWeiboId:(NSString *)weiboID commentID:(NSString*)commentID content:(NSString*)content
 {
@@ -887,13 +888,14 @@
     
     [self setPostUserInfo:item withRequestType:SinaReplyAComment];
     [requestQueue addOperation:item];
+    NSLog(@"WeiboHttpManager: replyACommentWeiboId: weiboID :%@; commentID: %@", weiboID, commentID);
   //  [item release];
 }
 
 //对一条微博进行评论
 -(void)commentAStatus:(NSString*)weiboID content:(NSString*)content
 {
-    //https://api.weibo.com/2/statuses/repost.json
+    //https://api.weibo.com/2/comments/create.json
     NSURL *url = [NSURL URLWithString:@"https://api.weibo.com/2/comments/create.json"];
     ASIFormDataRequest *item = [[ASIFormDataRequest alloc] initWithURL:url];
     self.authToken = [[NSUserDefaults standardUserDefaults] objectForKey:USER_STORE_ACCESS_TOKEN];
@@ -904,6 +906,9 @@
     
     [self setPostUserInfo:item withRequestType:SinaCommentAStatus];
     [requestQueue addOperation:item];
+    
+    NSLog(@"WeiboHttpManager: commentAStatus: weiboID :%@", weiboID);
+    
    // [item release];
 }
 

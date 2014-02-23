@@ -92,7 +92,7 @@ static ZJTStatusBarAlertWindow *instance = nil;
     _window.backgroundColor = [UIColor whiteColor];
     
     //backgroundImage
-    self.backgroundImage = [[UIImage imageNamed:@"statusbar_background.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:0]; 
+    //self.backgroundImage = [[UIImage imageNamed:@"statusbar_background.png"] stretchableImageWithLeftCapWidth:2 topCapHeight:0];
     
     //backgroundImageView
    // [_backgroundImageView release];
@@ -104,7 +104,7 @@ static ZJTStatusBarAlertWindow *instance = nil;
     _label = [[UILabel alloc] initWithFrame:statusBarFrame];
     _label.textAlignment        = UITextAlignmentCenter;
     _label.textColor            = [UIColor blackColor];
-    _label.backgroundColor      = [UIColor clearColor];
+    _label.backgroundColor      = [UIColor whiteColor];
     _label.adjustsFontSizeToFitWidth = YES;
     _label.minimumFontSize      = 5.0;
     

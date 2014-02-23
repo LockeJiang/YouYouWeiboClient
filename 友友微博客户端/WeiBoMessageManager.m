@@ -243,18 +243,20 @@ static WeiBoMessageManager * instance=nil;
 //回复一条评论
 -(void)replyACommentWeiboId:(NSString *)weiboID commentID:(NSString*)commentID content:(NSString*)content
 {
+    NSLog(@"WeiboMessageMananger: replyACommentWeiboId: weiboID :%@; commentID: %@", weiboID,commentID);
     [httpManager replyACommentWeiboId:weiboID commentID:commentID content:content];
 }
 
 //对一条微博进行评论
 -(void)commentAStatus:(NSString*)weiboID content:(NSString*)content
 {
-    [httpManager commentAStatus:weiboID content:content];
+    NSLog(@"WeiboMessageMananger: commentAStatus: weiboID :%@", weiboID);[httpManager commentAStatus:weiboID content:content];
 }
 
 //转发一条微博
 -(void)repost:(NSString*)weiboID content:(NSString*)content withComment:(int)isComment
 {
+    NSLog(@"WeiboMessageMananger: repost: weiboID :%@", weiboID);
     [httpManager repost:weiboID content:content withComment:isComment];
 }
 
@@ -388,13 +390,7 @@ static WeiBoMessageManager * instance=nil;
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
-//转发一条微博
--(void)didRepost:(Status *)sts
-{
-    NSLog(@"sts.text = %@",sts.text);
-    NSNotification *notification = [NSNotification notificationWithName:MMSinaGotRepost object:sts];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
+
 
 //按天返回热门微博转发榜的微博列表
 -(void)didGetHotRepostDaily:(NSArray *)statusArr
@@ -456,9 +452,18 @@ static WeiBoMessageManager * instance=nil;
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
+//转发一条微博
+-(void)didRepost:(Status *)sts
+{
+    NSLog(@"WeiboMessageMananger: didRepost: sts :%@", sts);
+    NSNotification *notification = [NSNotification notificationWithName:MMSinaGotRepost object:sts];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+}
+
 //回复一条评论
 -(void)didReplyAComment:(BOOL)isOK
 {
+    NSLog(@"WeiboMessageMananger: didReplyAComment: isOK :%hhd", isOK);
     NSNotification *notification = [NSNotification notificationWithName:MMSinaReplyAComment object:[NSNumber numberWithBool:isOK]];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
@@ -466,6 +471,7 @@ static WeiBoMessageManager * instance=nil;
 //对一条微博进行评论
 -(void)didCommentAStatus:(BOOL)isOK
 {
+    NSLog(@"WeiboMessageMananger: didCommentAStatus: isOK :%hhd", isOK);
     NSNotification *notification = [NSNotification notificationWithName:MMSinaCommentAStatus object:[NSNumber numberWithBool:isOK]];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }

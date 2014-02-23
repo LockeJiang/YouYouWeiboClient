@@ -21,6 +21,7 @@
 //sections
 enum{
     kDiscoverSection = 0,
+    kFeaturedappsSection,
     kAccountSection,
     kSectionsCount,
 };
@@ -30,16 +31,22 @@ enum{
 //status
 enum{
     kNearbyStatus = 0,
-    kHotApps,
-    kHotGames,
 //    kMetionsStatuses,
-    kStatusRowsCount,
+    kNearbyStatusRowsCount,
 };
+
+enum{
+    kHotApps= 0,
+    kHotGames,
+    //    kMetionsStatuses,
+    kFeaturedRowsCount,
+};
+
 
 //kAccountSection
 enum {
     kCurrentUser = 0,
-    kFollowAndFans,
+ //   kFollowAndFans,
     kQuitAccount,
     kAboutMe,
     kAccountRowsCount,
@@ -57,7 +64,7 @@ enum {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"发现";
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        //self.tabBarItem.image = [UIImage imageNamed:@"second"];
         
     }
     return self;
@@ -77,26 +84,15 @@ enum {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetUserInfo:)    name:MMSinaGotUserInfo          object:nil];
     
-    //解决tableview被导航栏遮挡的问题
-    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
+ 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MMSinaGotUserInfo          object:nil];
     
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -118,10 +114,13 @@ enum {
 {
     // Return the number of rows in the section.
     if (section == kDiscoverSection) {
-        return kStatusRowsCount;
+        return kNearbyStatusRowsCount;
     }
     else if (section == kAccountSection) {
         return kAccountRowsCount;
+    }
+    else if (section == kFeaturedappsSection) {
+        return kFeaturedRowsCount;
     }
     return 0;
 }
@@ -150,31 +149,32 @@ enum {
             cell.textLabel.text = @"退出账号";
         }
         
+        /*
         else if (row == kFollowAndFans) {
             cell.textLabel.text = @"关注 | 粉丝";
         }
+         */
         
         else if (row == kAboutMe) {
             cell.textLabel.text = @"关于友友微博";
         }
     }
     
-    else if (section == kDiscoverSection) {
+    if (section == kDiscoverSection) {
         if (row == kNearbyStatus) {
             cell.textLabel.text = @"附近的微博";
         }
+    }
         
-        else if (row == kHotApps) {
-            cell.textLabel.text = @"热门应用";
-        }
-        
-        else if (row == kHotGames) {
-            cell.textLabel.text = @"热门游戏";
-        }
-        
-//        else if (row == kMetionsStatuses) {
-//            cell.textLabel.text = @"@我";
-//        }
+    if (section == kFeaturedappsSection) {
+            
+            if (row == kHotApps) {
+                cell.textLabel.text = @"热门应用";
+            }
+            
+            else if (row == kHotGames) {
+                cell.textLabel.text = @"热门游戏";
+            }
     }
     return cell;
 }
@@ -222,6 +222,7 @@ enum {
        //     [alert release];
         }
         
+        /*
         else if (row == kFollowAndFans) {
             FollowAndFansVC *b = [[FollowAndFansVC alloc] initWithNibName:@"FollowAndFansVC" bundle:nil];
             b.hidesBottomBarWhenPushed = YES;
@@ -231,6 +232,7 @@ enum {
             [self.navigationController pushViewController:b animated:YES];
           //  [b release];
         }
+        */
         
         else if (row == kAboutMe) {
             AboutViewController *a = [[AboutViewController alloc] initWithNibName:@"AboutViewController" bundle:nil];
@@ -241,27 +243,28 @@ enum {
     }
     
     else if (section == kDiscoverSection) {
-        if (row == kNearbyStatus) {        
-            NearbyStatusViewController  *X = [[NearbyStatusViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-            X.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:X animated:YES];
-         //   [X release];
+        if (row == kNearbyStatus) {
+                NearbyStatusViewController  *X = [[NearbyStatusViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+                X.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:X animated:YES];
+                //   [X release];
+            }
         }
-        
-        else if (row == kHotApps) {
+    else if (section == kFeaturedappsSection) {
+        if (row == kHotApps) {
             ZJTHotRepostViewController *h = [[ZJTHotRepostViewController alloc] initWithType:kHotRepostDaily];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
-         //   [h release];
+            //   [h release];
         }
         
         else if (row == kHotGames) {
             HotTrendsVC *h = [[HotTrendsVC alloc] initWithStyle:UITableViewStylePlain];
             h.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:h animated:YES];
-        //    [h release];
-        }
-        
+            //    [h release];
+            
+    }
 //        else if (row == kMetionsStatuses) {
 //            MetionsStatusesVC *m = [[MetionsStatusesVC alloc]initWithNibName:@"FirstViewController" bundle:nil];
 //            m.hidesBottomBarWhenPushed = YES;

@@ -44,13 +44,15 @@
                 for (int i = 0; i < arr.count; i++)
                 {
                     StatusCDItem *s = [arr objectAtIndex:i];
-                    Status *sts = [[Status alloc]init];
+                    Status *sts = [[Status alloc] init];
                     [sts updataStatusFromStatusCDItem:s];
                     if (i == 0) {
                         sts.isRefresh = @"YES";
                     }
-                    [statuesArr insertObject:sts atIndex:s.index.intValue];
-                  //  [sts release];
+                    if (s) {
+                        [statuesArr insertObject:sts atIndex:s.index.intValue];
+                    }
+                                     //  [sts release];
                 }
             }
         }
@@ -63,7 +65,7 @@
        // dispatch_release(readQueue);
     });
     
-    NSLog(@"bilateralTableViewController: getDataFromCD: statuesArr Count:%i", statuesArr.count);
+    NSLog(@"bilateralTableViewController: getDataFromCD: statuesArr Count:%lu", (unsigned long)statuesArr.count);
 
 }
 
@@ -84,17 +86,9 @@
     
     [defaultNotifCenter addObserver:self selector:@selector(didGetPublicTimeLine:) name:MMSinaGotPublicTimeLine          object:nil];
    
-    //解决view被导航栏遮挡问题
-    if(([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
-    
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
-    self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
-    
-    NSLog(@"bilateralTableViewController: viewDidLoad: statuesArr Count:%i", statuesArr.count);
+    NSLog(@"BilateralTableViewContrillerBase: tableView.contentInset.top:%f", self.tableView.contentInset.top);
+    NSLog(@"BilateralTableViewContrillerBase: table.contentInset.top:%f", self.table.contentInset.top);
+    NSLog(@"bilateralTableViewController: viewDidLoad: statuesArr Count:%lu", (unsigned long)statuesArr.count);
 
 }
 
@@ -116,9 +110,8 @@
         NSLog(@"bilateralTableViewController: viewWillAppear: shouldload");
    }
     [super viewWillAppear:animated];
-    [UIView animateWithDuration:0.2 animations:^{
-        [self.view setAlpha:1];
-    }];
+    [self.view setAlpha:1];
+ 
     NSLog(@"bilateralTableViewController: viewWillAppear: not shouldload: statuesArr Count:%i", statuesArr.count);
 
 }
@@ -126,9 +119,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [UIView animateWithDuration:0.2 animations:^{
-        [self.view setAlpha:0];
-    }];
+    [self.view setAlpha:1];
     NSLog(@"bilateralTableViewController: viewWillDisappear: statuesArr Count:%i", statuesArr.count);
 
 }

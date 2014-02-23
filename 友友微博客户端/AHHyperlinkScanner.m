@@ -118,7 +118,7 @@
 			nil];
 		m_strictChecking = flag;
 		m_scanLocation = 0;
-		m_scanStringLength = [m_scanString length];
+		m_scanStringLength = [m_scanString length]?:0;
 	}
 	return self;
 }

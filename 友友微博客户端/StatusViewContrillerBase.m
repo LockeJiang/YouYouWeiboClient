@@ -33,7 +33,7 @@
 -(void)setup
 {
     self.title = @"主页";// NSLocalizedString(@"First", @"First");
-    self.tabBarItem.image = [UIImage imageNamed:@"first"]; 
+    //self.tabBarItem.image = [UIImage imageNamed:@"first"];
     
     CGRect frame = table.frame;
     frame.size.height = frame.size.height + REFRESH_FOOTER_HEIGHT;
@@ -113,6 +113,7 @@
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
+     NSLog(@"StatusViewContrillerBase: tableView.contentInset.top:%f", self.table.contentInset.top);
 }
 
 -(void)viewDidUnload
@@ -305,6 +306,7 @@
             [[HHNetDataCacheManager getInstance] getDataWithURL:status.retweetedStatus.thumbnailPic withIndex:row];
         }
     }
+    [cell updateCellTextWith:status];
     cell.avatarImage.image = status.user.avatarImage;
     cell.contentImage.image = status.statusImage;
     cell.retwitterContentImage.image = status.statusImage;
@@ -399,7 +401,7 @@
             CGFloat y = (568.0 - size.height)/2.0;
             frame.origin.y = y >= 0 ? y:0;
             browserView.imageView.frame = frame;
-            if (browserView.imageView.frame.size.height > 480) {
+            if (browserView.imageView.frame.size.height > 568) {
                 browserView.aScrollView.contentSize = CGSizeMake(320, browserView.imageView.frame.size.height);
             }
             

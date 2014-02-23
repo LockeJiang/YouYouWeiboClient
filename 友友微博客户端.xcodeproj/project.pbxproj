@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F115809718B48C9300EEA258 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = F115809518B48C9300EEA258 /* second.png */; };
+		F115809818B48C9300EEA258 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F115809618B48C9300EEA258 /* second@2x.png */; };
 		F1330B5418B0A3AC00300BEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5318B0A3AC00300BEB /* Foundation.framework */; };
 		F1330B5618B0A3AC00300BEB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */; };
 		F1330B5818B0A3AC00300BEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5718B0A3AC00300BEB /* UIKit.framework */; };
@@ -110,6 +112,15 @@
 		F1D6D90A18B11433000CA8E5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D6D90918B11433000CA8E5 /* libz.dylib */; };
 		F1D6D90C18B1144D000CA8E5 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D6D90B18B1144D000CA8E5 /* libicucore.dylib */; };
 		F1D6D90E18B1145C000CA8E5 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D6D90D18B1145C000CA8E5 /* libsqlite3.dylib */; };
+		F1E297B318B652000069E60E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297B218B652000069E60E /* CoreLocation.framework */; };
+		F1E297B518B6520D0069E60E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297B418B6520D0069E60E /* CoreText.framework */; };
+		F1E297B718B652180069E60E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297B618B652180069E60E /* Security.framework */; };
+		F1E297B918B652280069E60E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297B818B652280069E60E /* ImageIO.framework */; };
+		F1E297BB18B652380069E60E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297BA18B652380069E60E /* QuartzCore.framework */; };
+		F1E297BD18B652410069E60E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297BC18B652410069E60E /* MessageUI.framework */; };
+		F1E297BF18B652540069E60E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297BE18B652540069E60E /* SystemConfiguration.framework */; };
+		F1E297C118B652610069E60E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297C018B652610069E60E /* MobileCoreServices.framework */; };
+		F1E297C318B6526B0069E60E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1E297C218B6526B0069E60E /* CFNetwork.framework */; };
 		F1E4D6BF18B0A83500C59868 /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E4D6BA18B0A83500C59868 /* ChineseToPinyin.m */; };
 		F1E4D6C018B0A83500C59868 /* ZJTHelpler.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E4D6BC18B0A83500C59868 /* ZJTHelpler.m */; };
 		F1E4D6C118B0A83500C59868 /* ZJTStatusBarAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E4D6BE18B0A83500C59868 /* ZJTStatusBarAlertWindow.m */; };
@@ -205,6 +216,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F115809518B48C9300EEA258 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		F115809618B48C9300EEA258 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		F1330B5018B0A3AC00300BEB /* 友友微博客户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "友友微博客户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1330B5318B0A3AC00300BEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -326,6 +339,15 @@
 		F1D6D90918B11433000CA8E5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		F1D6D90B18B1144D000CA8E5 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		F1D6D90D18B1145C000CA8E5 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F1E297B218B652000069E60E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F1E297B418B6520D0069E60E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		F1E297B618B652180069E60E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F1E297B818B652280069E60E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		F1E297BA18B652380069E60E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F1E297BC18B652410069E60E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		F1E297BE18B652540069E60E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F1E297C018B652610069E60E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F1E297C218B6526B0069E60E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F1E4D6B918B0A83500C59868 /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
 		F1E4D6BA18B0A83500C59868 /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
 		F1E4D6BB18B0A83500C59868 /* ZJTHelpler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJTHelpler.h; sourceTree = "<group>"; };
@@ -482,6 +504,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E297C318B6526B0069E60E /* CFNetwork.framework in Frameworks */,
+				F1E297C118B652610069E60E /* MobileCoreServices.framework in Frameworks */,
+				F1E297BF18B652540069E60E /* SystemConfiguration.framework in Frameworks */,
+				F1E297BD18B652410069E60E /* MessageUI.framework in Frameworks */,
+				F1E297BB18B652380069E60E /* QuartzCore.framework in Frameworks */,
+				F1E297B918B652280069E60E /* ImageIO.framework in Frameworks */,
+				F1E297B718B652180069E60E /* Security.framework in Frameworks */,
+				F1E297B518B6520D0069E60E /* CoreText.framework in Frameworks */,
+				F1E297B318B652000069E60E /* CoreLocation.framework in Frameworks */,
 				F1D6D90E18B1145C000CA8E5 /* libsqlite3.dylib in Frameworks */,
 				F1D6D90C18B1144D000CA8E5 /* libicucore.dylib in Frameworks */,
 				F1D6D90A18B11433000CA8E5 /* libz.dylib in Frameworks */,
@@ -528,6 +559,15 @@
 		F1330B5218B0A3AC00300BEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F1E297C218B6526B0069E60E /* CFNetwork.framework */,
+				F1E297C018B652610069E60E /* MobileCoreServices.framework */,
+				F1E297BE18B652540069E60E /* SystemConfiguration.framework */,
+				F1E297BC18B652410069E60E /* MessageUI.framework */,
+				F1E297BA18B652380069E60E /* QuartzCore.framework */,
+				F1E297B818B652280069E60E /* ImageIO.framework */,
+				F1E297B618B652180069E60E /* Security.framework */,
+				F1E297B418B6520D0069E60E /* CoreText.framework */,
+				F1E297B218B652000069E60E /* CoreLocation.framework */,
 				F1D6D90D18B1145C000CA8E5 /* libsqlite3.dylib */,
 				F1D6D90B18B1144D000CA8E5 /* libicucore.dylib */,
 				F1D6D90918B11433000CA8E5 /* libz.dylib */,
@@ -716,6 +756,8 @@
 		F1E4D61E18B0A5B700C59868 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				F115809518B48C9300EEA258 /* second.png */,
+				F115809618B48C9300EEA258 /* second@2x.png */,
 				F16DEE4A18B1B9F20098195F /* Images */,
 				F1E4D7D718B0C38900C59868 /* first.png */,
 				F1E4D7D818B0C38900C59868 /* first@2x.png */,
@@ -1163,6 +1205,7 @@
 				F16DEEB618B1BC7B0098195F /* compose_trendbutton_background@2x.png in Resources */,
 				F16DEEDB18B1BD100098195F /* publish_button_24.gif in Resources */,
 				F16DEED918B1BD100098195F /* LOGO_64x64.png in Resources */,
+				F115809718B48C9300EEA258 /* second.png in Resources */,
 				F16DEEB018B1BC7B0098195F /* compose_camerabutton_background@2x.png in Resources */,
 				F16DEE9E18B1BC5E0098195F /* timeline_retweet_count_icon@2x.png in Resources */,
 				F16DEE8218B1BC050098195F /* blueArrow@2x.png in Resources */,
@@ -1178,6 +1221,7 @@
 				F16DEED118B1BD100098195F /* 240.png in Resources */,
 				F16DEEA618B1BC5E0098195F /* timeline_rt_border@2x.png in Resources */,
 				F16DEEB518B1BC7B0098195F /* compose_trendbutton_background.png in Resources */,
+				F115809818B48C9300EEA258 /* second@2x.png in Resources */,
 				F1E4D7A018B0BCC100C59868 /* ZJTProfileViewController.xib in Resources */,
 				F16DEE9D18B1BC5E0098195F /* statusdetail_header_arrow@2x.png in Resources */,
 				F1E4D75718B0B37900C59868 /* LPFriendCell.xib in Resources */,
@@ -1412,12 +1456,12 @@
 		F1330B8318B0A3AC00300BEB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "友友微博客户端/友友微博客户端-Prefix.pch";
 				INFOPLIST_FILE = "友友微博客户端/友友微博客户端-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1426,12 +1470,12 @@
 		F1330B8418B0A3AC00300BEB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "友友微博客户端/友友微博客户端-Prefix.pch";
 				INFOPLIST_FILE = "友友微博客户端/友友微博客户端-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -311,6 +311,7 @@ float const yAdjustmentFactor = 1.3;
 	
 	CFArrayRef lines = CTFrameGetLines(_frame);
 	
+    //这里有一个bug，_frame为0*0时，则下面异常。
 	CGPoint origins[CFArrayGetCount(lines)];
 	CTFrameGetLineOrigins(_frame, CFRangeMake(0, 0), origins);
 	

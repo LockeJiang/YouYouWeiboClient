@@ -23,6 +23,7 @@ typedef enum {
 @property (retain, nonatomic) IBOutlet UITextView *contentV;
 @property (retain, nonatomic) NSString *contentStr;
 @property (retain, nonatomic) NSString *weiboID;
+@property (retain, nonatomic) NSString *commentID;
 @property (retain, nonatomic) Status *status;
 @property (assign, nonatomic) VCType vctype;
 

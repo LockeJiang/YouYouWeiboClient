@@ -384,7 +384,7 @@ static SHKActivityIndicator *currentIndicator = nil;
             if (!isPortrait) 
                 duration *= 2;
             
-            frame = CGRectMake(0, 0, 320, 480);
+            frame = CGRectMake(0, 0, 320, 568);
             break;
         }
         case UIDeviceOrientationPortraitUpsideDown:
@@ -394,7 +394,7 @@ static SHKActivityIndicator *currentIndicator = nil;
             if (!isPortrait) 
                 duration *= 2;
             
-            frame = CGRectMake(0, 0, 320, 480);
+            frame = CGRectMake(0, 0, 320, 568);
             break;
         }
         case UIDeviceOrientationLandscapeLeft:
@@ -404,7 +404,7 @@ static SHKActivityIndicator *currentIndicator = nil;
             if (isPortrait) 
                 duration *= 2;
             
-            frame = CGRectMake(0, 0, 480, 320);
+            frame = CGRectMake(0, 0, 568, 320);
             break;
         }
         case UIDeviceOrientationLandscapeRight:
@@ -414,7 +414,7 @@ static SHKActivityIndicator *currentIndicator = nil;
             if (isPortrait) 
                 duration *= 2;
             
-            frame = CGRectMake(0, 0, 480, 320);
+            frame = CGRectMake(0, 0, 568, 320);
             break;
         }
         default:

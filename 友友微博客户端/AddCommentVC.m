@@ -18,6 +18,7 @@
 @synthesize contentV;
 @synthesize contentStr;
 @synthesize weiboID;
+@synthesize commentID;
 @synthesize status;
 @synthesize vctype = _vctype;
 
@@ -41,19 +42,19 @@
     
     //回复微博
     if (_vctype == kReplyAStatus) {
-        sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(commentStatus)];
-        self.title = @"回复微博";
+        sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"评论" style:UIBarButtonItemStylePlain target:self action:@selector(commentStatus)];
+        self.title = @"评论微博";
     }
     
     //转发
     else if(_vctype == kRepost){
-        sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(repost)];
+        sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"转发" style:UIBarButtonItemStylePlain target:self action:@selector(repost)];
         self.title = @"转发微博";
     }
     
     //回复评论
     else{
-        sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(commentComment)];
+        sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"回复评论" style:UIBarButtonItemStylePlain target:self action:@selector(commentComment)];
         self.title = @"回复评论";
     }
 
@@ -61,6 +62,10 @@
     //[sendBtn release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetRepostResult:) name:MMSinaGotRepost object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetCommentAStatusResult:) name:MMSinaCommentAStatus object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetReplyACommentResult:) name:MMSinaReplyAComment object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -81,24 +86,36 @@
 
 -(void)didGetRepostResult:(NSNotification*)sender
 {
-    
+     NSLog(@"AddCommentVC: didGetRepostResult: sender :%@", sender);
 }
+
+-(void)didGetCommentAStatusResult:(NSNotification*)sender
+{
+     NSLog(@"AddCommentVC: didGetCommentAStatusResult: sender :%@", sender);}
+
+-(void)didGetReplyACommentResult:(NSNotification*)sender
+{
+     NSLog(@"AddCommentVC: didGetReplyACommentResult: sender :%@", sender);
+}
+
 
 //转发
 -(void)repost
 {
-    [[WeiBoMessageManager getInstance] repost:weiboID content:contentV.text withComment:0];
+    NSLog(@"AddCommentVC: repost: weiboID :%@", weiboID);
+    [[WeiBoMessageManager getInstance] repost:weiboID content:contentV.text withComment:1];
 }
 
 //评论微博
 -(void)commentStatus
 {
+    NSLog(@"AddCommentVC: commentStatus: weiboID :%@", weiboID);
     [[WeiBoMessageManager getInstance] commentAStatus:weiboID content:contentV.text];
 }
 
 //回复评论
 -(void)commentComment
-{
-//    [[WeiBoMessageManager getInstance]
+{    NSLog(@"AddCommentVC: commentComment: weiboID :%@; commentID: %@", weiboID, commentID);
+    [[WeiBoMessageManager getInstance] replyACommentWeiboId:weiboID commentID:commentID content:contentV.text];
 }
 @end

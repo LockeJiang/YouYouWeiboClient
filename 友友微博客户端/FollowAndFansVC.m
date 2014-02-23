@@ -78,6 +78,9 @@ enum{
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
+    
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidUnload

@@ -54,7 +54,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:HHNetDataCacheNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:@"tapClicked"              object:nil];
     [UIApplication sharedApplication].statusBarHidden = NO;
-    aScrollView.contentSize = CGSizeMake(320, 480);
+    aScrollView.contentSize = CGSizeMake(320, 568);
     [self removeFromSuperview];
 }
 
@@ -78,14 +78,14 @@
     CGRect frame = imageView.frame;
     frame.size = size;
     frame.origin.x = 0;
-    CGFloat y = (480.0 - size.height)/2.0;
+    CGFloat y = (568.0 - size.height)/2.0;
     frame.origin.y = y >= 0 ? y:0;
     imageView.frame = frame;
-    if (self.imageView.frame.size.height > 480) {
+    if (self.imageView.frame.size.height > 568) {
         aScrollView.contentSize = CGSizeMake(320, self.imageView.frame.size.height);
     }
     else {
-        aScrollView.contentSize = CGSizeMake(320, 480);
+        aScrollView.contentSize = CGSizeMake(320, 568);
     }
 }
 
