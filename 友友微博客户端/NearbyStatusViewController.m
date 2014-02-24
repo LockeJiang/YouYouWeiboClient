@@ -36,11 +36,12 @@
     [defaultNotifCenter addObserver:self selector:@selector(didGetNearbyStatus:)    name:MMSinaGotNearbyStatuses   object:nil];
     
     //解决tableview被导航栏遮挡的问题
-    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65.0f);
+    
+    NSLog(@"NSVC: viewDidLoad: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    
      NSLog(@"NearbyStatusVC: viewDidLoad:%i", statuesArr.count);
 }
 
@@ -74,6 +75,11 @@
     
     [manager getNearbyStatuses:_locationManager.location.coordinate];
     [self.tableView reloadData];
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65.0f);
+    
+    NSLog(@"NSVC: set after reloaddata: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
     
     [[SHKActivityIndicator currentIndicator] displayActivity:@"正在定位..." inView:self.view];
     
@@ -99,6 +105,13 @@
     [statuesArr removeAllObjects];
     self.statuesArr = sender.object;
     [self.tableView reloadData];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65.0f);
+    
+    NSLog(@"NSVC: did reloaddata: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    
     [[SHKActivityIndicator currentIndicator] hide];
     //    [[ZJTStatusBarAlertWindow getInstance] hide];
     [self refreshVisibleCellsImages];

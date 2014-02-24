@@ -38,7 +38,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.tag = 0;
     
-    BilateralTableViewController *bilateral = [[BilateralTableViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    BilateralTableViewController *bilateral = [[BilateralTableViewController alloc] initWithNibName:@"lockeTableViewController" bundle:nil];
     FirstViewController *firstViewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
     MetionsStatusesVC *m = [[MetionsStatusesVC alloc] initWithNibName:@"FirstViewController" bundle:nil];
     //ZJTProfileViewController *profile = [[[ZJTProfileViewController alloc] initWithNibName:@"ZJTProfileViewController" bundle:nil] autorelease ];

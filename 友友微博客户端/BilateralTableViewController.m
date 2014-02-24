@@ -60,7 +60,19 @@
         [[CoreDataManager getInstance] cleanEntityRecords:@"UserCDItem"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            CGFloat offset = self.tableView.contentOffset.y;
+            NSLog(@"BVC: Before getdatafromCD: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+                  ,self.tableView.contentOffset.y);
             [self.tableView reloadData];
+            
+            NSLog(@"BVC: after getdatafromCD: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+                  ,self.tableView.contentOffset.y);
+            
+            self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+            self.tableView.contentOffset = CGPointMake(0.0f, offset);
+            
+            NSLog(@"BVC: set after getdatafromCD: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+                  ,self.tableView.contentOffset.y);
         });
        // dispatch_release(readQueue);
     });
@@ -72,6 +84,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //self.automaticallyAdjustsScrollViewInsets = NO;
     refreshFooterView.hidden = NO;
     _page = 1;
     _maxID = -1;
@@ -82,13 +95,17 @@
     
     UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithTitle:@"发微博" style:UIBarButtonItemStylePlain target:self action:@selector(twitter)];
     self.navigationItem.rightBarButtonItem = retwitterBtn;
-   // [retwitterBtn release];
+    // [retwitterBtn release];
     
     [defaultNotifCenter addObserver:self selector:@selector(didGetPublicTimeLine:) name:MMSinaGotPublicTimeLine          object:nil];
    
-    NSLog(@"BilateralTableViewContrillerBase: tableView.contentInset.top:%f", self.tableView.contentInset.top);
-    NSLog(@"BilateralTableViewContrillerBase: table.contentInset.top:%f", self.table.contentInset.top);
-    NSLog(@"bilateralTableViewController: viewDidLoad: statuesArr Count:%lu", (unsigned long)statuesArr.count);
+    //CGFloat offset = self.tableView.contentOffset.y;
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65);
+    
+    NSLog(@"BVC: after viewDidLoad: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    //NSLog(@"bilateralTableViewController: viewDidLoad: statuesArr Count:%lu", (unsigned long)statuesArr.count);
 
 }
 
@@ -111,8 +128,14 @@
    }
     [super viewWillAppear:animated];
     [self.view setAlpha:1];
- 
-    NSLog(@"bilateralTableViewController: viewWillAppear: not shouldload: statuesArr Count:%i", statuesArr.count);
+    
+    //CGFloat offset = self.tableView.contentOffset.y;
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65);
+    
+    NSLog(@"BVC: after viewWillAppear: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    //NSLog(@"bilateralTableViewController: viewWillAppear: not shouldload: statuesArr Count:%i", statuesArr.count);
 
 }
 
@@ -153,16 +176,31 @@
         }
         
     }
-    NSLog(@"bilateralTableViewController: ViewDidAppear: statuesArr Count:%i", statuesArr.count);
+    
+    //CGFloat offset = self.tableView.contentOffset.y;
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65);
+    
+    NSLog(@"BVC: after viewDidAppear: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    //NSLog(@"BVC: ViewDidAppear: statuesArr Count:%i", statuesArr.count);
 }
 
 #pragma mark - Methods
 //上拉
 -(void)refresh
 {
+    CGFloat offset = self.tableView.contentOffset.y;
+    NSLog(@"BVC: Before Refresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
     [manager getPublicTimeLine:-1 maxID:_maxID count:-1 page:_page baseApp:-1 feature:-1];
     _shouldAppendTheDataArr = YES;
-    NSLog(@"bilateralTableViewController: refresh");
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, offset);
+    NSLog(@"BVC: After Refresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    //NSLog(@"bilateralTableViewController: refresh");
 }
 
 -(void)appWillResign:(id)sender
@@ -210,6 +248,10 @@
         }
     }
     
+    CGFloat offset = self.tableView.contentOffset.y;
+    NSLog(@"BVC: Before reloaddata: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    
     [self stopLoading];
     [self doneLoadingTableViewData];
     
@@ -227,6 +269,7 @@
     }
     _page++;
     refreshFooterView.hidden = NO;
+    
     [self.tableView reloadData];
     
     [[SHKActivityIndicator currentIndicator] hide];
@@ -236,14 +279,33 @@
         self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
     }
     
-    NSLog(@"bilateralTableViewController: didGetPublicTimeLine: statuesArr Count:%i", statuesArr.count);
+    NSLog(@"BVC: After reloaddata: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, offset);
+    
+    NSLog(@"BVC: Set After reloaddata: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
+    
+    //NSLog(@"bilateralTableViewController: didGetPublicTimeLine: statuesArr Count:%i", statuesArr.count);
 
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
     _reloading = YES;
+    CGFloat offset = self.tableView.contentOffset.y;
+    NSLog(@"BVC: Before SegoRefresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
 	[manager getPublicTimeLine:-1 maxID:-1 count:-1 page:-1 baseApp:-1 feature:-1];
     _shouldAppendTheDataArr = NO;
+    
+    //CGFloat offset = self.tableView.contentOffset.y;
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, offset);
+    
+    NSLog(@"BVC: After SegoRefresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
+          ,self.tableView.contentOffset.y);
 }
 
 @end

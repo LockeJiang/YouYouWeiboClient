@@ -40,9 +40,9 @@
 //#define UIEdgeInsetsMiddle      UIEdgeInsetsMake(0, 0, -(scrollView.contentOffset.y - startOffset), 0)
 
 //
-#define UIEdgeInsetsOriginal    UIEdgeInsetsMake( 0, 0,-REFRESH_FOOTER_HEIGHT, 0)
-#define UIEdgeInsetsFinal       UIEdgeInsetsMake( 0, 0,0, 0)
-#define UIEdgeInsetsMiddle      UIEdgeInsetsMake(0, 0, -(scrollView.contentOffset.y - startOffset), 0)
+#define UIEdgeInsetsOriginal    UIEdgeInsetsMake( 64, 0,-REFRESH_FOOTER_HEIGHT, 0)
+#define UIEdgeInsetsFinal       UIEdgeInsetsMake( 64, 0,0, 0)
+#define UIEdgeInsetsMiddle      UIEdgeInsetsMake( 64, 0, -(scrollView.contentOffset.y - startOffset), 0)
 
 @interface PullRefreshTableViewController : UITableViewController {
     UIView *refreshFooterView;

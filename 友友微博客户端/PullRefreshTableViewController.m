@@ -75,9 +75,9 @@
 }
 
 - (void)setupStrings{
-    textPull    = [[NSString alloc] initWithString:@"上拉加载更多..."];
-    textRelease = [[NSString alloc] initWithString:@"松开即可加载..."];
-    textLoading = [[NSString alloc] initWithString:@"加载中..."];
+    textPull    = @"上拉加载更多...";
+    textRelease = @"松开即可加载...";
+    textLoading = @"加载中...";
 }
 
 - (void)addPullToRefreshFooter {
@@ -207,17 +207,4 @@
     [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
 }
 
-/*
-- (void)dealloc {
-    [refreshFooterView release];
-    [refreshLabel release];
-    [lastUpdatedLabel release];
-    [refreshArrow release];
-    [refreshSpinner release];
-    [textPull release];
-    [textRelease release];
-    [textLoading release];
-    [super dealloc];
-}
-*/
 @end

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F115809718B48C9300EEA258 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = F115809518B48C9300EEA258 /* second.png */; };
 		F115809818B48C9300EEA258 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F115809618B48C9300EEA258 /* second@2x.png */; };
+		F125475C18BA092B007AF324 /* lockeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F125475A18BA092B007AF324 /* lockeTableViewController.m */; };
+		F125475D18BA092B007AF324 /* lockeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F125475B18BA092B007AF324 /* lockeTableViewController.xib */; };
 		F1330B5418B0A3AC00300BEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5318B0A3AC00300BEB /* Foundation.framework */; };
 		F1330B5618B0A3AC00300BEB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */; };
 		F1330B5818B0A3AC00300BEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1330B5718B0A3AC00300BEB /* UIKit.framework */; };
@@ -218,6 +220,9 @@
 /* Begin PBXFileReference section */
 		F115809518B48C9300EEA258 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		F115809618B48C9300EEA258 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		F125475918BA092B007AF324 /* lockeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lockeTableViewController.h; sourceTree = "<group>"; };
+		F125475A18BA092B007AF324 /* lockeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lockeTableViewController.m; sourceTree = "<group>"; };
+		F125475B18BA092B007AF324 /* lockeTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = lockeTableViewController.xib; sourceTree = "<group>"; };
 		F1330B5018B0A3AC00300BEB /* 友友微博客户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "友友微博客户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1330B5318B0A3AC00300BEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1330B5518B0A3AC00300BEB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1043,6 +1048,9 @@
 				F1E4D76518B0B5F200C59868 /* FollowerVC.xib */,
 				F1E4D75B18B0B53900C59868 /* BilateralTableViewController.h */,
 				F1E4D75C18B0B53900C59868 /* BilateralTableViewController.m */,
+				F125475918BA092B007AF324 /* lockeTableViewController.h */,
+				F125475A18BA092B007AF324 /* lockeTableViewController.m */,
+				F125475B18BA092B007AF324 /* lockeTableViewController.xib */,
 			);
 			name = TabsVCs;
 			sourceTree = "<group>";
@@ -1182,6 +1190,7 @@
 				F1E4D74C18B0B33800C59868 /* StatusCell.xib in Resources */,
 				F16DEED818B1BD100098195F /* LOGO_48x48.png in Resources */,
 				F16DEE8B18B1BC340098195F /* timeline_image_icon@2x.png in Resources */,
+				F125475D18BA092B007AF324 /* lockeTableViewController.xib in Resources */,
 				F16DEEA418B1BC5E0098195F /* timeline_rt_border_t@2x.png in Resources */,
 				F16DEEB218B1BC7B0098195F /* compose_locatebutton_background@2x.png in Resources */,
 				F16DEEBF18B1BC8D0098195F /* 32.png in Resources */,
@@ -1303,6 +1312,7 @@
 				F1E4D72D18B0AEB700C59868 /* Status.m in Sources */,
 				F1E4D79418B0BCC000C59868 /* NearbyStatusViewController.m in Sources */,
 				F1E4D75D18B0B53900C59868 /* BilateralTableViewController.m in Sources */,
+				F125475C18BA092B007AF324 /* lockeTableViewController.m in Sources */,
 				F1E4D72918B0AEB700C59868 /* Draft.m in Sources */,
 				F1E4D72818B0AEB700C59868 /* Comment.m in Sources */,
 				F1E4D79718B0BCC000C59868 /* StatusViewContrillerBase.m in Sources */,

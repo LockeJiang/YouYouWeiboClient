@@ -35,19 +35,19 @@
 {
     
     if (_JSContentTF == nil) {
-        _JSContentTF = [[JSTwitterCoreTextView alloc] initWithFrame:CGRectMake(40, 20, 280, 80)];
+        _JSContentTF = [[JSTwitterCoreTextView alloc] initWithFrame:CGRectMake(0, 40, 320, 80)];
         [_JSContentTF setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [_JSContentTF setDelegate:self];
         [_JSContentTF setFontName:FONT];
         [_JSContentTF setFontSize:FONT_SIZE];
         [_JSContentTF setHighlightColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
-        [_JSContentTF setBackgroundColor:[UIColor clearColor]];
+        [_JSContentTF setBackgroundColor:[UIColor whiteColor]];
         [_JSContentTF setPaddingTop:PADDING_TOP];
         [_JSContentTF setPaddingLeft:PADDING_LEFT];
 //        _JSContentTF.userInteractionEnabled = NO;
-        _JSContentTF.backgroundColor = [UIColor clearColor];
-        _JSContentTF.textColor = [UIColor colorWithRed:120/255.0 green:120/255.0 blue:120/255.0 alpha:1];
-        _JSContentTF.linkColor = [UIColor colorWithRed:96/255.0 green:138/255.0 blue:176/255.0 alpha:1];
+        _JSContentTF.backgroundColor = [UIColor whiteColor];
+        _JSContentTF.textColor = [UIColor colorWithRed:60/255.0 green:60/255.0 blue:60/255.0 alpha:1];
+        _JSContentTF.linkColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
         [self.contentView addSubview:_JSContentTF];
     }
     
@@ -57,19 +57,19 @@
 -(JSTwitterCoreTextView*)JSRetitterContentTF
 {    
     if (_JSRetitterContentTF == nil) {
-        _JSRetitterContentTF = [[JSTwitterCoreTextView alloc] initWithFrame:CGRectMake(10, 0, 270, 80)];
+        _JSRetitterContentTF = [[JSTwitterCoreTextView alloc] initWithFrame:CGRectMake(0, 0, 297, 80)];
         [_JSRetitterContentTF setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [_JSRetitterContentTF setDelegate:self];
         [_JSRetitterContentTF setFontName:FONT];
         [_JSRetitterContentTF setFontSize:FONT_SIZE];
         [_JSRetitterContentTF setHighlightColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
-        [_JSRetitterContentTF setBackgroundColor:[UIColor clearColor]];
-        [_JSRetitterContentTF setPaddingTop:PADDING_TOP];
-        [_JSRetitterContentTF setPaddingLeft:PADDING_LEFT];
+        [_JSRetitterContentTF setBackgroundColor:[UIColor whiteColor]];
+        [_JSRetitterContentTF setPaddingTop:(PADDING_TOP - 5 )];
+        [_JSRetitterContentTF setPaddingLeft:(PADDING_LEFT - 9 )];
 //        _JSRetitterContentTF.userInteractionEnabled = NO;
         _JSRetitterContentTF.backgroundColor = [UIColor clearColor];
-        _JSRetitterContentTF.textColor = [UIColor colorWithRed:120/255.0 green:120/255.0 blue:120/255.0 alpha:1];
-        _JSRetitterContentTF.linkColor = [UIColor colorWithRed:96/255.0 green:138/255.0 blue:176/255.0 alpha:1];
+        _JSRetitterContentTF.textColor = [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1];
+        _JSRetitterContentTF.linkColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1];
         [self.retwitterMainV addSubview:_JSRetitterContentTF];
     }
     
@@ -97,15 +97,46 @@
 
 -(void)updateCellTextWith:(Status*)status
 {
+    Status  *retwitterStatus    = status.retweetedStatus;
+    User *theUser = status.user;
+    
+    UIView* myView =[[ UIView alloc]initWithFrame:CGRectMake(9,0.0,299.0,60.0)];
+    if (!isnan(theUser.gender)) {
+        if (theUser.gender == GenderMale) {
+            myView.backgroundColor = [UIColor  colorWithRed:43/255.0 green:205/255.0 blue:183/255.0 alpha:1 ];
+        }
+        else if (theUser.gender == GenderFemale) {
+            myView.backgroundColor = [UIColor  colorWithRed:255/255.0 green:111/255.0 blue:105/255.0 alpha:1 ];
+        }
+    }
+    else {
+        myView.backgroundColor = [UIColor  colorWithRed:43/255.0 green:255/255.0 blue:105/255.0 alpha:1 ];
+    }
+   
+    [self insertSubview:myView atIndex:0];
+    
+    avatarImage.layer.cornerRadius = 5;
+    avatarImage.layer.masksToBounds = YES;
+    avatarImage.layer.borderWidth = 1;
+    avatarImage.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    contentImage.layer.cornerRadius = 5;
+    contentImage.layer.masksToBounds = YES;
+    contentImage.layer.borderWidth = 1;
+    contentImage.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    retwitterContentImage.layer.cornerRadius = 4;
+    retwitterContentImage.layer.masksToBounds = YES;
+    retwitterContentImage.layer.borderWidth = 1;
+    retwitterContentImage.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
     self.contentTF.text = status.text;
     self.JSContentTF.text = status.text;
     self.userNameLB.text = status.user.screenName;
-    countLB.text = [NSString stringWithFormat:@"  :%d     :%d",status.commentsCount,status.retweetsCount];
+    countLB.text = [NSString stringWithFormat:@"转发: %d  评论: %d",status.commentsCount,status.retweetsCount];
     fromLB.text = [NSString stringWithFormat:@"来自:%@",status.source];
     timeLB.text = status.timestamp;
     
-    Status  *retwitterStatus    = status.retweetedStatus;
-    User *theUser = status.user;
     
     vipImageView.hidden = !theUser.verified;
     BOOL haveImage = NO;
@@ -115,7 +146,7 @@
     CGFloat padding = 320 - frame.origin.x - frame.size.width;
     
     frame = retweetCountImageView.frame;
-    CGSize size = [[NSString stringWithFormat:@"%d",status.retweetsCount] sizeWithFont:[UIFont systemFontOfSize:12.0]];
+    CGSize size = [[NSString stringWithFormat:@"%d",status.retweetsCount] sizeWithFont:[UIFont systemFontOfSize:13 ]];
     frame.origin.x = 320 - padding - size.width - retweetCountImageView.frame.size.width - 5;
     retweetCountImageView.frame = frame;
     
@@ -162,11 +193,13 @@
     //转发博文Text
     [self adjustTheHeightOf:self.JSRetitterContentTF withText:self.JSRetitterContentTF.text];
     
+    /*
     frame = timeLB.frame;
     CGSize size = [timeLB.text sizeWithFont:[UIFont systemFontOfSize:13.0]];
     frame.size = size;
     frame.origin.x = 320 - 10 - size.width;
     timeLB.frame = frame;
+    */
     
     frame = haveImageFlagImageView.frame;
     frame.origin.x = timeLB.frame.origin.x - haveImageFlagImageView.frame.size.width - 8;
@@ -201,12 +234,20 @@
     contentImage.frame = frame;
     
     //背景设置
+    /*
     if (bgImage.image == nil) {
-        bgImage.image = [[UIImage imageNamed:@"table_header_bg.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+        bgImage.image = [[UIImage imageNamed:@"table_header_bg.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:10];
     }
     if (retwitterBgImage.image == nil) {
-        retwitterBgImage.image = [[UIImage imageNamed:@"timeline_rt_border.png"] stretchableImageWithLeftCapWidth:130 topCapHeight:14];
+        retwitterBgImage.image = [[UIImage imageNamed:@"timeline_rt_border.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:14];
     }
+    */
+    //retwitterMainV.backgroundColor = [UIColor   colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1];
+    retwitterMainV.layer.cornerRadius = 4;
+    retwitterMainV.layer.masksToBounds = YES;
+    retwitterMainV.layer.borderWidth = 1;
+    retwitterMainV.layer.borderColor = [UIColor colorWithRed: 40/255 green:40/255 blue:40/255 alpha:0.1].CGColor;
+                                        
     if (retwitterMainV.hidden == NO) {
         return self.retwitterMainV.frame.size.height + self.retwitterMainV.frame.origin.y + 25;
     }
@@ -217,6 +258,8 @@
     else {
         return self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + 35;
     }
+    
+    
 }
 
 -(IBAction)tapDetected:(id)sender
@@ -254,28 +297,5 @@
     }
 }
 
-/*
-- (void)dealloc {
-    self.JSRetitterContentTF = nil;
-    self.JSContentTF = nil;
-    [avatarImage release];
-    [contentTF release];
-    [userNameLB release];
-    [bgImage release];
-    [contentImage release];
-    [retwitterMainV release];
-    [retwitterBgImage release];
-    [retwitterContentTF release];
-    [retwitterContentImage release];
-    [cellIndexPath release];
-    [countLB release];
-    [fromLB release];
-    [timeLB release];
-    [vipImageView release];
-    [commentCountImageView release];
-    [retweetCountImageView release];
-    [haveImageFlagImageView release];
-    [super dealloc];
-}
-*/
+
 @end

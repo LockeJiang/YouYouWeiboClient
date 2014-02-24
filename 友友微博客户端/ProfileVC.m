@@ -45,29 +45,6 @@
 @synthesize avatarImage;
 @synthesize screenName;
 
-/*
--(void)dealloc
-{
-    self.screenName = nil;
-    self.avatarImage = nil;
-    self.user = nil;
-    self.imageDictionary = nil;
-    self.statusCellNib = nil;
-    self.statuesArr = nil;
-    self.userID = nil;
-    self.browserView = nil;
-    self.table = nil;
-    self.headerVImageV = nil;
-    self.headerVNameLB = nil;
-    self.weiboCount = nil;
-    self.followerCount = nil;
-    self.followingCount = nil;
-    
-    self.headerView = nil;
-    [super dealloc];
-}
-*/
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -157,15 +134,8 @@
         [manager getUserInfoWithScreenName:self.screenName];
     }
     
-    self.tableView.contentInset = UIEdgeInsetsOriginal;
-    
-    //解决tableview被导航栏遮挡的问题
-    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
-
+    self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    self.tableView.contentOffset = CGPointMake(0.0f, -65.0f);
     
 }
 
