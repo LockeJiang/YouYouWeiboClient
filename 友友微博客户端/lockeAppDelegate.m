@@ -39,8 +39,8 @@
     self.window.tag = 0;
     
     BilateralTableViewController *bilateral = [[BilateralTableViewController alloc] initWithNibName:@"lockeTableViewController" bundle:nil];
-    FirstViewController *firstViewController = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
-    MetionsStatusesVC *m = [[MetionsStatusesVC alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    FirstViewController *firstViewController = [[FirstViewController alloc] initWithNibName:@"lockeTableViewController" bundle:nil];
+    MetionsStatusesVC *m = [[MetionsStatusesVC alloc] initWithNibName:@"lockeTableViewController" bundle:nil];
     //ZJTProfileViewController *profile = [[[ZJTProfileViewController alloc] initWithNibName:@"ZJTProfileViewController" bundle:nil] autorelease ];
     //FollowAndFansVC *followingVC = [[[FollowAndFansVC alloc] initWithNibName:@"FollowAndFansVC" bundle:nil] autorelease];
     SettingVC *settingVC = [[SettingVC alloc] initWithNibName:@"SettingVC" bundle:nil];
@@ -65,7 +65,14 @@
     self.window.rootViewController = self.tabBarController;
     
     self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
-    self.tabBarController.tabBar.opaque = NO;
+    self.tabBarController.tabBar.translucent = YES;
+    
+    nav1.tabBarItem.image = [UIImage imageNamed:@"first"];
+    nav2.tabBarItem.image = [UIImage imageNamed:@"second"];
+    nav3.tabBarItem.image = [UIImage imageNamed:@"third"];
+    nav4.tabBarItem.image = [UIImage imageNamed:@"fourth"];
+    
+    
     [self.window makeKeyAndVisible];
     
     return YES;

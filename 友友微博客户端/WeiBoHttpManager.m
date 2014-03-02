@@ -1309,7 +1309,7 @@
         
         if (arr == nil || [arr isEqual:[NSNull null]])
         {
-            NSLog(@"htpmanager: SINAGetNearbyStatuses: arr.count:%i", arr.count);
+            NSLog(@"htpmanager: SINAGetNearbyStatuses: arr.count:%lu", (unsigned long)arr.count);
             return;
         }
         
@@ -1320,10 +1320,10 @@
         }
         if ([delegate respondsToSelector:@selector(didGetNearbyStatused:)]) {
             [delegate didGetNearbyStatused:statuesArr];
-            NSLog(@"htpmanager respond yes: SINAGetNearbyStatuses: statuesArr.count:%i", statuesArr.count);
+            NSLog(@"htpmanager respond yes: SINAGetNearbyStatuses: statuesArr.count:%lu", (unsigned long)statuesArr.count);
         }
         
-        NSLog(@"htpmanager: SINAGetNearbyStatuses: statuesArr.count:%i", statuesArr.count);
+        NSLog(@"htpmanager: SINAGetNearbyStatuses: statuesArr.count:%lu", (unsigned long)statuesArr.count);
 
        // [statuesArr release];
     }

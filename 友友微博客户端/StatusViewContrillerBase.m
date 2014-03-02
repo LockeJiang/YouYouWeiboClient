@@ -107,13 +107,13 @@
     [super viewDidLoad];
     
     [self setUpRefreshView];
-    self.tableView.contentInset = UIEdgeInsetsOriginal;
+    //self.tableView.contentInset = UIEdgeInsetsOriginal;
     refreshFooterView.hidden = YES;
     
     [defaultNotifCenter addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(mmRequestFailed:)   name:MMSinaRequestFailed object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(loginSucceed)       name:DID_GET_TOKEN_IN_WEB_VIEW object:nil];
-     NSLog(@"StatusViewContrillerBase: tableView.contentInset.top:%f", self.table.contentInset.top);
+     NSLog(@"StatusViewContrillerBase: tableView.contentInset.top:%f; tableView.contentOffset.y: %f", self.table.contentInset.top,self.tableView.contentOffset.y);
 }
 
 -(void)viewDidUnload
@@ -367,11 +367,12 @@
     Status *status  = [statuesArr objectAtIndex:row];
     detailVC.status = status;
     
+    //这个传值会导致图片未loading完毕时点击无效
     detailVC.avatarImage = status.user.avatarImage;
     detailVC.contentImage = status.statusImage;
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
-  //  [detailVC release];
+    //  [detailVC release];
 }
 
 #pragma mark - StatusCellDelegate
@@ -479,7 +480,7 @@
         SVModalWebViewController *web = [[SVModalWebViewController alloc] initWithURL:[NSURL URLWithString:link]];
         web.modalPresentationStyle = UIModalPresentationPageSheet;
         web.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsCopyLink | SVWebViewControllerAvailableActionsMailLink;
-        [self presentModalViewController:web animated:YES];
+        [self presentViewController:web animated:YES completion:NULL];
        // [web release];
     }
     else if ([link hasPrefix:@"#"]) {

@@ -13,7 +13,7 @@
 
 +(CGSize) calcLabelSizeWithString:(NSString *)string andFont:(UIFont *)font maxLines:(NSInteger)lines lineWidth:(float)lineWidth
 {
-    float lineHeight = [ string sizeWithFont: font ].height; // Calculate the height of one line.
+    float lineHeight = [string sizeWithAttributes:@{ NSFontAttributeName:[UIFont systemFontOfSize:12.0 ] }].height; // Calculate the height of one line.
     if ( string == nil ) {
         return CGSizeMake(lineWidth, lineHeight);
     }
@@ -30,13 +30,14 @@
 
 +(NSInteger) calcLabelLineWithString:(NSString *)string andFont:(UIFont *)font lineWidth:(float)lineWidth
 {
-    float lineHeight = [ string sizeWithFont: font ].height;
+    float lineHeight = [ string sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0] }].height;
     
-    CGSize size = [string sizeWithFont:font 
-                     constrainedToSize:CGSizeMake(lineWidth, lineHeight*1000.0f) 
-                         lineBreakMode:NSLineBreakByWordWrapping];
+    CGRect size = [string boundingRectWithSize:CGSizeMake(lineWidth, lineHeight*1000.0f)
+                               options:NSStringDrawingUsesLineFragmentOrigin
+                            attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}
+                               context:nil];
     // Get the total height, divide by the height of one line to get the # of lines.
-    return size.height / lineHeight;
+    return ceilf(size.size.height) / lineHeight;
 }
 
 @end

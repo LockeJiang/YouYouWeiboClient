@@ -65,7 +65,7 @@ enum{
         _segmentCtrol = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"关注", @"粉丝", nil]];
         _segmentCtrol.frame = CGRectMake(0.0, 0.0, 200.0, 30.0);
         [_segmentCtrol addTarget:self action:@selector(segmentAction) forControlEvents:UIControlEventValueChanged];
-        _segmentCtrol.segmentedControlStyle = UISegmentedControlStyleBar; 
+        //_segmentCtrol.segmentedControlStyle = UISegmentedControlStyleBar;
         
         self.navigationItem.titleView = _segmentCtrol;
         _segmentCtrol.selectedSegmentIndex = kFollowIndex;

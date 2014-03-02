@@ -66,6 +66,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetCommentAStatusResult:) name:MMSinaCommentAStatus object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didGetReplyACommentResult:) name:MMSinaReplyAComment object:nil];
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

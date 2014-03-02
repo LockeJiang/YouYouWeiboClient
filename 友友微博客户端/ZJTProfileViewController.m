@@ -139,7 +139,7 @@ enum {
     }
     
     nameLabel.text = user.screenName;
-    CGSize size = [user.screenName sizeWithFont:nameLabel.font];
+    CGSize size = [user.screenName sizeWithAttributes:@{ NSFontAttributeName:nameLabel.font}];
     
     CGRect frame =  nameLabel.frame;
     if (size.width>125) {
@@ -327,9 +327,16 @@ enum {
 //计算text field 的高度。
 -(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
 {
-    UIFont * font=[UIFont  systemFontOfSize:14];
-    CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with, 300000.0f) lineBreakMode:kLineBreakMode];
-    CGFloat height = size.height + 0.;
+    //UIFont * font=[UIFont  systemFontOfSize:14];
+    //CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with, 300000.0f) lineBreakMode:kLineBreakMode];
+    
+    CGRect size = [contentText boundingRectWithSize:CGSizeMake(with, 300000.0f)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}
+                                       context:nil];
+    
+    
+    CGFloat height = ceilf(size.size.height) + 0.;
     return height;
 }
 

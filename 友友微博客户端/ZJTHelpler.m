@@ -85,9 +85,15 @@ static ZJTHelpler *instance = nil;
 
 + (CGFloat)getTextViewHeight:(NSString*)contentText with:(CGFloat)with sizeOfFont:(CGFloat)fontSize addtion:(CGFloat)add
 {
-    UIFont * font=[UIFont  systemFontOfSize:fontSize];
-    CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:NSLineBreakByWordWrapping];
-    CGFloat height = size.height + add;
+    //UIFont * font=[UIFont  systemFontOfSize:fontSize];
+    //CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    CGRect size = [contentText boundingRectWithSize:CGSizeMake(with - kTextViewPadding, 300000.0f)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize]}
+                                       context:nil];
+    
+    CGFloat height = ceilf(size.size.height)+ add;
     return height;
 }
 

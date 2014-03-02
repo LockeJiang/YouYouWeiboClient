@@ -244,7 +244,7 @@ enum {
     
     else if (section == kDiscoverSection) {
         if (row == kNearbyStatus) {
-                NearbyStatusViewController  *X = [[NearbyStatusViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+                NearbyStatusViewController  *X = [[NearbyStatusViewController alloc] initWithNibName:@"lockeTableViewController" bundle:nil];
                 X.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:X animated:YES];
                 //   [X release];

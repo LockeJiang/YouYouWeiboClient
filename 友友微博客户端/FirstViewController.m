@@ -58,7 +58,20 @@
         [[CoreDataManager getInstance] cleanEntityRecords:@"UserCDItem"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            //CGFloat offset = self.tableView.contentOffset.y;
+            
+             //NSLog(@"FVC: before getDataFromCD: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+            
+            
             [self.tableView reloadData];
+            
+             //NSLog(@"FVC: after getDataFromCD: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+            
+            
+            //self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+            //self.tableView.contentOffset = CGPointMake(0.0f, offset);
+            
+             //NSLog(@"FVC:  set after getDataFromCD: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
         });
        // dispatch_release(readQueue);
     });
@@ -86,14 +99,13 @@
     [defaultNotifCenter addObserver:self selector:@selector(didGetUnreadCount:) name:MMSinaGotUnreadCount       object:nil];
     [defaultNotifCenter addObserver:self selector:@selector(appWillResign:)            name:UIApplicationWillResignActiveNotification             object:nil];
     
-    //解决view被导航栏遮挡问题
-    if(([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
+    //NSLog(@"FirstViewController: viewDidLoad");
     
-    NSLog(@"FirstViewController: viewDidLoad");
+     //NSLog(@"FVC: before ViewDidLoad: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
+    //self.tableView.contentInset = UIEdgeInsetsMake(64.0f, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    //self.tableView.contentOffset = CGPointMake(0.0f, -65.0f);
+     //NSLog(@"FVC: set after ViewDidLoad: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
 }
 
 -(void)viewDidUnload
@@ -158,6 +170,8 @@
         [manager getUserID];
         // [manager getHOtTrendsDaily];
     }
+    
+    //self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
     NSLog(@"FirstViewController: viewDidAppear");
 }
 
@@ -166,9 +180,19 @@
 //上拉
 -(void)refresh
 {
+    //CGFloat offset = self.tableView.contentOffset.y;
+    //NSLog(@"FVC: before Refresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
     [manager getHomeLine:-1 maxID:_maxID count:-1 page:_page baseApp:-1 feature:-1];
     _shouldAppendTheDataArr = YES;
-    NSLog(@"FirstViewController: refresh");
+    
+    //NSLog(@"FVC: after Refresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
+    //self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    //self.tableView.contentOffset = CGPointMake(0.0f, offset);
+    //NSLog(@"FVC: set after Refresh: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
+    //NSLog(@"FirstViewController: refresh");
 }
 
 -(void)appWillResign:(id)sender
@@ -236,6 +260,9 @@
         }
     }
     
+    //CGFloat offset = self.tableView.contentOffset.y;
+    //NSLog(@"FVC: before Didgethomeline: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
     [self stopLoading];
     [self doneLoadingTableViewData];
     
@@ -275,6 +302,14 @@
         self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerOnActive) userInfo:nil repeats:YES];
     }
     NSLog(@"FirstViewController: didGetHomeLine");
+    
+    //NSLog(@"FVC: after didGetHomeline: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
+    //self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    //self.tableView.contentOffset = CGPointMake(0.0f, offset);
+    
+    //NSLog(@"FVC: set after didGetHomeline: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    
 }
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
@@ -286,6 +321,7 @@
 
 -(void)didGetUnreadCount:(NSNotification*)sender
 {
+    //CGFloat offset = self.tableView.contentOffset.y;
     NSDictionary *dic = sender.object;
     NSNumber *num = [dic objectForKey:@"status"];
     
@@ -297,6 +333,10 @@
     [[ZJTStatusBarAlertWindow getInstance] showWithString:[NSString stringWithFormat:@"有%@条新微博",num]];
     [[ZJTStatusBarAlertWindow getInstance] performSelector:@selector(hide) withObject:nil afterDelay:10];
     NSLog(@"FirstViewController: didGetUnreadCount");
+    
+    //self.tableView.contentInset = UIEdgeInsetsMake(64, UIEdgeInsetsOriginal.left, UIEdgeInsetsOriginal.bottom, UIEdgeInsetsOriginal.right) ;
+    //NSLog(@"FVC: after didGetUnreadCount: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top,self.tableView.contentOffset.y);
+    //self.tableView.contentOffset = CGPointMake(0.0f, offset);
 }
 
 @end

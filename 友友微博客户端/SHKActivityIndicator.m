@@ -292,7 +292,8 @@ static SHKActivityIndicator *currentIndicator = nil;
                                        spinner.frame.size.height);
 //        }
     
-        CGSize messageSize = [message sizeWithFont: [UIFont boldSystemFontOfSize:15]];
+        CGSize messageSize = [message sizeWithAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15.0] }];
+                              
         NSUInteger labelWidth = messageSize.width +  20 + 24;
         
         if (labelWidth > 120 && labelWidth < 250) {

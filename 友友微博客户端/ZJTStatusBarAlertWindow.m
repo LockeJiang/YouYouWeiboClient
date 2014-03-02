@@ -102,11 +102,11 @@ static ZJTStatusBarAlertWindow *instance = nil;
     //label
    // [_label release];
     _label = [[UILabel alloc] initWithFrame:statusBarFrame];
-    _label.textAlignment        = UITextAlignmentCenter;
+    _label.textAlignment        = NSTextAlignmentCenter;
     _label.textColor            = [UIColor blackColor];
     _label.backgroundColor      = [UIColor whiteColor];
     _label.adjustsFontSizeToFitWidth = YES;
-    _label.minimumFontSize      = 5.0;
+    _label.minimumScaleFactor      = 5.0;
     
     //views struct
     [_window addSubview:_backgroundImageView];

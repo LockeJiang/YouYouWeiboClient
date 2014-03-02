@@ -23,6 +23,8 @@
 #import "ZJTProfileViewController.h"
 #import "TwitterVC.h"
 
+#define kLineBreakMode              UILineBreakModeWordWrap
+
 enum{
     kCommentClickActionSheet = 0,
     kStatusReplyActionSheet,
@@ -79,7 +81,7 @@ enum  {
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) 
+    if (self)
     {
         _hasRetwitter = NO;
         isFromProfileVC = NO;
@@ -118,7 +120,7 @@ enum  {
 }
 
 -(JSTwitterCoreTextView*)JSRetitterContentTF
-{    
+{
     if (_JSRetitterContentTF == nil) {
         _JSRetitterContentTF = [[JSTwitterCoreTextView alloc] initWithFrame:CGRectMake(10, 0, 300, 80)];
         [_JSRetitterContentTF setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
@@ -142,10 +144,10 @@ enum  {
 +(CGFloat)getJSHeight:(NSString*)text jsViewWith:(CGFloat)with
 {
     CGFloat height = [JSCoreTextView measureFrameHeightForText:text
-                                                      fontName:FONT 
-                                                      fontSize:FONT_SIZE 
+                                                      fontName:FONT
+                                                      fontSize:FONT_SIZE
                                             constrainedToWidth:with - (PADDING_LEFT * 2)
-                                                    paddingTop:PADDING_TOP 
+                                                    paddingTop:PADDING_TOP
                                                    paddingLeft:PADDING_LEFT];
     return height;
 }
@@ -168,7 +170,7 @@ enum  {
         Comment *comment = [commentArr objectAtIndex:inPath.row];
         User *theUser = comment.user;
         
-        if (theUser.avatarImage == nil) 
+        if (theUser.avatarImage == nil)
         {
             [[HHNetDataCacheManager getInstance] getDataWithURL:theUser.profileImageUrl withIndex:inPath.row];
         }
@@ -188,34 +190,34 @@ enum  {
 
 - (void)textView:(JSCoreTextView *)textView linkTapped:(AHMarkedHyperlink *)link
 {
-    if ([link.URL.absoluteString hasPrefix:@"@"]) 
+    if ([link.URL.absoluteString hasPrefix:@"@"])
     {
         NSString *sn = [[link.URL.absoluteString substringFromIndex:1] decodeFromURL];
         NSLog(@"sn = %@",sn);
-//        ProfileVC *profile = [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil];
-//        profile.screenName = sn;
-//        profile.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:profile animated:YES];
-//        [profile release];
+        //        ProfileVC *profile = [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil];
+        //        profile.screenName = sn;
+        //        profile.hidesBottomBarWhenPushed = YES;
+        //        [self.navigationController pushViewController:profile animated:YES];
+        //        [profile release];
         ZJTProfileViewController *profile = [[ZJTProfileViewController alloc]initWithNibName:@"ZJTProfileViewController" bundle:nil];
         profile.screenName = sn;
         profile.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:profile animated:YES];
-       // [profile release];
+        //[profile release];
     }
     
     else if ([link.URL.absoluteString hasPrefix:@"http"]) {
         SVModalWebViewController *web = [[SVModalWebViewController alloc] initWithURL:link.URL];
         web.modalPresentationStyle = UIModalPresentationPageSheet;
         web.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsCopyLink | SVWebViewControllerAvailableActionsMailLink;
-        [self presentModalViewController:web animated:YES];
-      //  [web release];
+        [self presentViewController:web animated:YES completion:NULL];
+        //[web release];
     }
     else if ([link.URL.absoluteString hasPrefix:@"#"]) {
         HotTrendsDetailTableVC *hotVC = [[HotTrendsDetailTableVC alloc] initWithNibName:@"FirstViewController" bundle:nil];
         hotVC.qureyString = [[link.URL.absoluteString substringFromIndex:1] decodeFromURL];;
         [self.navigationController pushViewController:hotVC animated:YES];
-      //  [hotVC release];
+        //[hotVC release];
     }
 }
 
@@ -234,12 +236,12 @@ enum  {
     CGFloat padding = 320 - frame.origin.x - frame.size.width;
     
     frame = retwitterCountImageView.frame;
-    CGSize size = [[NSString stringWithFormat:@"%d",status.retweetsCount] sizeWithFont:[UIFont systemFontOfSize:12.0]];
+    CGSize size = [[NSString stringWithFormat:@"%d",status.retweetsCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0] }];
     frame.origin.x = 320 - padding - size.width - retwitterCountImageView.frame.size.width - 5;
     retwitterCountImageView.frame = frame;
     
     frame = commentCountImageView.frame;
-    size = [[NSString stringWithFormat:@"%d     :%d",status.commentsCount,status.retweetsCount] sizeWithFont:[UIFont systemFontOfSize:12.0]];
+    size = [[NSString stringWithFormat:@"%d     :%d",status.commentsCount,status.retweetsCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0] }];
     frame.origin.x = 320 - padding - size.width - commentCountImageView.frame.size.width - 5;
     commentCountImageView.frame = frame;
 }
@@ -254,7 +256,7 @@ enum  {
     _hasRetwitter   = status.hasRetwitter;
     _hasImage       = status.hasImage;
     _haveRetwitterImage = status.haveRetwitterImage;
-        
+    
     twitterNameLB.text = user.screenName;
     twitterNameLB.hidden = NO;
     contentTF.text = status.text;
@@ -279,7 +281,7 @@ enum  {
     
     UIBarButtonItem *retwitterBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(replyActionSheet)];
     self.navigationItem.rightBarButtonItem = retwitterBtn;
-   // [retwitterBtn release];
+    //[retwitterBtn release];
     
     contentImageV.hidden = !_hasImage;
     contentImageBackgroundView.hidden = !_hasImage;
@@ -293,14 +295,6 @@ enum  {
     CGRect frame = table.frame;
     frame.size.height = frame.size.height + REFRESH_FOOTER_HEIGHT;
     table.frame = frame;
-    
-    //解决tableview被导航栏遮挡的问题
-    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
-
 }
 
 -(void)viewDidUnload
@@ -324,14 +318,14 @@ enum  {
     [center addObserver:self selector:@selector(didUnfollowByUserID:) name:MMSinaUnfollowedByUserIDWithResult object:nil];
     [center addObserver:self selector:@selector(mmRequestFailed:) name:MMSinaRequestFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAvatar:)         name:HHNetDataCacheNotification object:nil];
-        [center addObserver:self selector:@selector(didCommentAStatus:) name:MMSinaCommentAStatus object:nil];
+    [center addObserver:self selector:@selector(didCommentAStatus:) name:MMSinaCommentAStatus object:nil];
     if (self.commentArr == nil) {
         [manager getCommentListWithID:status.statusId maxID:nil page:1];
-//        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view]; 
+        //        [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated 
+-(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
@@ -352,15 +346,13 @@ enum  {
     UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"转发",@"评论", nil];
     as.tag = kStatusReplyActionSheet;
     [as showInView:self.view];
-   // [as release];
+    //[as release];
 }
 
 -(void)setViewsHeight
 {
     //博文Text
     CGRect frame;
-    CGSize size = CGSizeMake(1, 1);
-    float zoom = 1;
     [self adjustTheHeightOf:self.JSContentTF withText:self.JSContentTF.text];
     
     //转发博文Text
@@ -368,58 +360,57 @@ enum  {
     
     //转发博文Text
     //size
-//    frame = retwitterTF.frame;
-//    frame.size = retwitterTF.contentSize;
-//    frame.origin = CGPointMake(10, 0);
-//    retwitterTF.frame = frame;
+    //    frame = retwitterTF.frame;
+    //    frame.size = retwitterTF.contentSize;
+    //    frame.origin = CGPointMake(10, 0);
+    //    retwitterTF.frame = frame;
     
     
     //转发的图片
     //origin
-    if (_hasImage) {
-        frame = retwitterImageV.frame;
-        frame.origin.y = self.JSRetitterContentTF.frame.size.height + 8;
-        size = [self getFrameOfImageView:retwitterImageV].size;
-        
-        zoom = 2 * size.width > size.height ? 250.0/size.width : 300.0/size.height;
-        size = CGSizeMake(size.width * zoom, size.height * zoom);
-        
-        frame.size = size;
-        retwitterImageV.frame = frame;
-        retwitterImageV.center = CGPointMake(160, retwitterImageV.center.y);
-        frame = retwitterImageV.frame;
-        retwitterImageBackground.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);
+    frame = retwitterImageV.frame;
+    frame.origin.y = self.JSRetitterContentTF.frame.size.height + 8;
+    CGSize size = [self getFrameOfImageView:retwitterImageV].size;
+    
+    //图片未load时给一个默认大小
+    if (isnan(size.height)) {
+        size.height = 100;
+        size.width = 100;
     }
-
+    
+    float zoom = 2 * size.width > size.height ? 250.0/size.width : 300.0/size.height;
+    size = CGSizeMake(size.width * zoom, size.height * zoom);
+    
+    frame.size = size;
+    retwitterImageV.frame = frame;
+    retwitterImageV.center = CGPointMake(160, retwitterImageV.center.y);
+    frame = retwitterImageV.frame;
+    retwitterImageBackground.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);
     
     //正文的图片
     //origin
-    if (_haveRetwitterImage) {
-        frame = contentImageV.frame;
-        frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + 8.0f;
-        size = [self getFrameOfImageView:contentImageV].size;
-        
-        zoom = size.width > size.height ? 250.0/size.width : 250.0/size.height;
-        size = CGSizeMake(size.width * zoom, size.height * zoom);
-        
-        frame.size = size;
-        contentImageV.frame = frame;
-        contentImageV.center = CGPointMake(160, contentImageV.center.y);
-        frame = contentImageV.frame;
-        contentImageBackgroundView.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);;
-    }
-  
-    if (_hasRetwitter) {
-        frame = retwitterMainV.frame;
-        //size
-        if (_haveRetwitterImage)    frame.size.height = self.JSRetitterContentTF.frame.size.height + retwitterImageBackground.frame.size.height + 18;
-        else                        frame.size.height = self.JSRetitterContentTF.frame.size.height + 10;
-        //origin
-        if(_hasImage)               frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + contentImageBackgroundView.frame.size.height + 18;
-        else                        frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y ;
-        retwitterMainV.frame = frame;
-    }
+    frame = contentImageV.frame;
+    frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + 8.0f;
+    size = [self getFrameOfImageView:contentImageV].size;
+    
+    zoom = size.width > size.height ? 250.0/size.width : 250.0/size.height;
+    size = CGSizeMake(size.width * zoom, size.height * zoom);
+    
+    frame.size = size;
+    contentImageV.frame = frame;
+    contentImageV.center = CGPointMake(160, contentImageV.center.y);
+    frame = contentImageV.frame;
+    contentImageBackgroundView.frame = CGRectMake(frame.origin.x - 5, frame.origin.y - 5, frame.size.width + 10, frame.size.height + 10);;
+    
     //转发的主View
+    frame = retwitterMainV.frame;
+    //size
+    if (_haveRetwitterImage)    frame.size.height = self.JSRetitterContentTF.frame.size.height + retwitterImageBackground.frame.size.height + 18;
+    else                        frame.size.height = self.JSRetitterContentTF.frame.size.height + 10;
+    //origin
+    if(_hasImage)               frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y + contentImageBackgroundView.frame.size.height + 18;
+    else                        frame.origin.y = self.JSContentTF.frame.size.height + self.JSContentTF.frame.origin.y ;
+    retwitterMainV.frame = frame;
     
     //headerView
     frame = headerView.frame;
@@ -432,7 +423,7 @@ enum  {
     headerView.frame = frame;
     
     //背景设置
-//    headerBackgroundView.image = [[UIImage imageNamed:@"table_header_bg.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
+    //    headerBackgroundView.image = [[UIImage imageNamed:@"table_header_bg.png"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
     mainViewBackView.image = [[UIImage imageNamed:@"timeline_rt_border.png"] stretchableImageWithLeftCapWidth:130 topCapHeight:14];
     contentImageBackgroundView.image = [[UIImage imageNamed:@"detail_image_background.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:50];
     retwitterImageBackground.image = [[UIImage imageNamed:@"detail_image_background.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:50];
@@ -440,7 +431,7 @@ enum  {
 
 - (void)refresh {
     [manager getCommentListWithID:status.statusId maxID:_maxID page:_page];
-//    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view]; 
+    //    [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:self.view];
 }
 
 -(void)follow
@@ -464,7 +455,7 @@ enum  {
     BOOL isRetwitter = sts.retweetedStatus && sts.retweetedStatus.originalPic != nil;
     UIApplication *app = [UIApplication sharedApplication];
     
-    CGRect frame = CGRectMake(0, 0, 320, 480);
+    CGRect frame = CGRectMake(0, 0, 320, 568);
     
     if (browserView == nil) {
         self.browserView = [[ImageBrowser alloc]initWithFrame:frame];
@@ -485,35 +476,35 @@ enum  {
     [browserView loadImage];
     [app.keyWindow addSubview:browserView];
     app.statusBarHidden = YES;
-//    app.statusBarHidden = YES;
-//    UIWindow *window = nil;
-//    for (UIWindow *win in app.windows) {
-//        if (win.tag == 0) {
-//            [win addSubview:browserView];
-//            window = win;
-//            [window makeKeyAndVisible];
-//        }
-//    }
+    //    app.statusBarHidden = YES;
+    //    UIWindow *window = nil;
+    //    for (UIWindow *win in app.windows) {
+    //        if (win.tag == 0) {
+    //            [win addSubview:browserView];
+    //            window = win;
+    //            [window makeKeyAndVisible];
+    //        }
+    //    }
     if (shouldShowIndicator == YES && browserView) {
         [[SHKActivityIndicator currentIndicator] displayActivity:@"正在载入..." inView:browserView];
-//        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
+        //        [[ZJTStatusBarAlertWindow getInstance] showWithString:@"正在载入，请稍后..."];
     }
     else shouldShowIndicator = YES;
 }
 
-- (IBAction)gotoProfileView:(id)sender 
+- (IBAction)gotoProfileView:(id)sender
 {
     if (isFromProfileVC) {
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }
     
-//    ProfileVC *profile = [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil];
-//    profile.userID = [NSString stringWithFormat:@"%lld",self.user.userId];
-//    profile.user = self.user;
-//    profile.avatarImage = self.avatarImage;
-//    [self.navigationController pushViewController:profile animated:YES];
-//    [profile release];
+    //    ProfileVC *profile = [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil];
+    //    profile.userID = [NSString stringWithFormat:@"%lld",self.user.userId];
+    //    profile.user = self.user;
+    //    profile.avatarImage = self.avatarImage;
+    //    [self.navigationController pushViewController:profile animated:YES];
+    //    [profile release];
     ZJTProfileViewController *profile = [[ZJTProfileViewController alloc]initWithNibName:@"ZJTProfileViewController" bundle:nil];
     profile.user = user;
     profile.hidesBottomBarWhenPushed = YES;
@@ -525,7 +516,7 @@ enum  {
 {
     [self stopLoading];
     [[SHKActivityIndicator currentIndicator] hide];
-//    [[ZJTStatusBarAlertWindow getInstance] hide];
+    //    [[ZJTStatusBarAlertWindow getInstance] hide];
 }
 
 - (IBAction)addComment:(id)sender {
@@ -539,9 +530,14 @@ enum  {
 //计算text field 的高度。
 -(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
 {
-    UIFont * font=[UIFont  systemFontOfSize:14];
-    CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with, 300000.0f) lineBreakMode:kLineBreakMode];
-    CGFloat height = size.height + 0.;
+   // UIFont * font=[UIFont  systemFontOfSize:14];
+   // CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with, 300000.0f) lineBreakMode:kLineBreakMode];
+    
+    CGRect size = [contentText boundingRectWithSize:CGSizeMake(with, 300000.0f)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}
+                                            context:nil];
+    CGFloat height = size.size.height + 0.;
     return height;
 }
 
@@ -564,14 +560,14 @@ enum  {
             Comment *com = [commentArr objectAtIndex:0];
             _maxID = [NSString stringWithFormat:@"%lld",com.commentId];
         }
-        if (commentArr != nil && ![commentArr isEqual:[NSNull null]]) 
+        if (commentArr != nil && ![commentArr isEqual:[NSNull null]])
         {
             NSNumber *count = [dic objectForKey:@"count"];
             status.commentsCount = [count intValue];
             [self resetCountLBFrame];
         }
         [[SHKActivityIndicator currentIndicator]hide];
-//        [[ZJTStatusBarAlertWindow getInstance] hide];
+        //        [[ZJTStatusBarAlertWindow getInstance] hide];
         [table reloadData];
         [self stopLoading];
         [self performSelector:@selector(refreshVisibleCellsImages) withObject:nil afterDelay:0.5];
@@ -586,7 +582,7 @@ enum  {
         
         if (alert) {
             [alert dismissWithClickedButtonIndex:0 animated:YES];
-         //   [alert release];
+        //    [alert release];
         }
     }
 }
@@ -653,7 +649,7 @@ enum  {
     ZJTCommentCell *cell = (ZJTCommentCell *)[self.table cellForRowAtIndexPath:comment.cellIndexPath];
     
     //得到的是头像图片
-    if ([url isEqualToString:theUser.profileImageUrl]) 
+    if ([url isEqualToString:theUser.profileImageUrl])
     {
         theUser.avatarImage = image;
         cell.avatarImage.image = theUser.avatarImage;
@@ -679,7 +675,7 @@ enum  {
     }
     else if (row >= [commentArr count] || [commentArr count] == 0)
     {
-//        NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[commentArr count]);
+        //        NSLog(@"cellForRowAtIndexPath error ,index = %d,count = %d",row,[commentArr count]);
         return cell;
     }
     
@@ -692,7 +688,7 @@ enum  {
     
     if (self.table.dragging == NO && self.table.decelerating == NO)
     {
-        if (comment.user.avatarImage == nil) 
+        if (comment.user.avatarImage == nil)
         {
             [[HHNetDataCacheManager getInstance] getDataWithURL:status.user.profileImageUrl withIndex:row];
         }
@@ -727,14 +723,14 @@ enum  {
     UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"回复",@"查看资料",@"关注", nil];
     as.tag = kCommentClickActionSheet;
     [as showInView:self.view];
-   // [as release];
+    //[as release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == kCommentClickActionSheet) {
         User *theUser = clickedComment.user;
-        NSLog(@"%dtheUser name = %@",buttonIndex,theUser.screenName);
+        NSLog(@"%ldtheUser name = %@",(long)buttonIndex,theUser.screenName);
         if (buttonIndex == kReplyComment) {
             
         }
@@ -743,7 +739,7 @@ enum  {
             profile.user = theUser;
             profile.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:profile animated:YES];
-        //    [profile release];
+            //[profile release];
         }
         else if(buttonIndex == kFollowTheUser){
             [manager followByUserID:theUser.userId inTableView:@""];
@@ -755,15 +751,15 @@ enum  {
             TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
             [self.navigationController pushViewController:tv animated:YES];
             [tv setupForRepost:[NSString stringWithFormat:@"%lld",self.status.statusId]];
-         //   [tv release];
+            //[tv release];
         }
         else if(buttonIndex == kComment)
         {
             TwitterVC *tv = [[TwitterVC alloc]initWithNibName:@"TwitterVC" bundle:nil];
             [self.navigationController pushViewController:tv animated:YES];
-            [tv setupForComment:[NSString stringWithFormat:@"%lld",clickedComment.commentId] 
+            [tv setupForComment:[NSString stringWithFormat:@"%lld",clickedComment.commentId]
                         weiboID:[NSString stringWithFormat:@"%lld",self.status.statusId]];
-         //   [tv release];
+            //[tv release];
         }
     }
 }
@@ -771,10 +767,10 @@ enum  {
 -(void)browserDidGetOriginImage:(NSDictionary*)dic
 {
     NSString * url=[dic objectForKey:HHNetDataCacheURLKey];
-    if ([url isEqualToString:browserView.bigImageURL]) 
+    if ([url isEqualToString:browserView.bigImageURL])
     {
         [[SHKActivityIndicator currentIndicator] hide];
-//        [[ZJTStatusBarAlertWindow getInstance] hide];
+        //        [[ZJTStatusBarAlertWindow getInstance] hide];
         shouldShowIndicator = NO;
         
         UIImage * img=[UIImage imageWithData:[dic objectForKey:HHNetDataCacheData]];
@@ -783,7 +779,7 @@ enum  {
         contentImageV.image = img;
         
         NSLog(@"big url = %@",browserView.bigImageURL);
-        if ([browserView.bigImageURL hasSuffix:@".gif"]) 
+        if ([browserView.bigImageURL hasSuffix:@".gif"])
         {
             CGFloat zoom = 320.0/browserView.imageView.image.size.width;
             CGSize size = CGSizeMake(320.0, browserView.imageView.image.size.height * zoom);
@@ -803,14 +799,14 @@ enum  {
             gifView.userInteractionEnabled = NO;
             gifView.tag = GIF_VIEW_TAG;
             [browserView addSubview:gifView];
-          //  [gifView release];
+            //[gifView release];
         }
     }
 }
 
 #pragma mark - Swipe Gesture delegate
 
-- (IBAction)popViewC:(id)sender 
+- (IBAction)popViewC:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }

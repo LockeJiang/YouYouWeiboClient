@@ -362,9 +362,12 @@
 //计算text field 的高度。
 -(CGFloat)cellHeight:(NSString*)contentText with:(CGFloat)with
 {
-    UIFont * font=[UIFont  systemFontOfSize:14];
-    CGSize size=[contentText sizeWithFont:font constrainedToSize:CGSizeMake(with - kTextViewPadding, 300000.0f) lineBreakMode:NSLineBreakByWordWrapping];
-    CGFloat height = size.height + 44;
+    CGRect size = [contentText boundingRectWithSize:CGSizeMake(with - kTextViewPadding, 300000.0f)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]}
+                                            context:NULL];
+    
+    CGFloat height = ceilf(size.size.height)+ 44;
     return height;
 }
 
@@ -626,7 +629,7 @@
         SVModalWebViewController *web = [[SVModalWebViewController alloc] initWithURL:[NSURL URLWithString:link]];
         web.modalPresentationStyle = UIModalPresentationPageSheet;
         web.availableActions = SVWebViewControllerAvailableActionsOpenInSafari | SVWebViewControllerAvailableActionsCopyLink | SVWebViewControllerAvailableActionsMailLink;
-        [self presentModalViewController:web animated:YES];
+        [self presentViewController:web animated:YES completion:NULL];
       //  [web release];
     }
     else if ([link hasPrefix:@"#"]) {

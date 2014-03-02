@@ -65,7 +65,7 @@
         [_JSRetitterContentTF setHighlightColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0]];
         [_JSRetitterContentTF setBackgroundColor:[UIColor whiteColor]];
         [_JSRetitterContentTF setPaddingTop:(PADDING_TOP - 5 )];
-        [_JSRetitterContentTF setPaddingLeft:(PADDING_LEFT - 9 )];
+        [_JSRetitterContentTF setPaddingLeft:(PADDING_LEFT - 8 )];
 //        _JSRetitterContentTF.userInteractionEnabled = NO;
         _JSRetitterContentTF.backgroundColor = [UIColor clearColor];
         _JSRetitterContentTF.textColor = [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1];
@@ -100,7 +100,7 @@
     Status  *retwitterStatus    = status.retweetedStatus;
     User *theUser = status.user;
     
-    UIView* myView =[[ UIView alloc]initWithFrame:CGRectMake(9,0.0,299.0,60.0)];
+    UIView* myView =[[ UIView alloc]initWithFrame:CGRectMake(10,0.0,299.0,60.0)];
     if (!isnan(theUser.gender)) {
         if (theUser.gender == GenderMale) {
             myView.backgroundColor = [UIColor  colorWithRed:43/255.0 green:205/255.0 blue:183/255.0 alpha:1 ];
@@ -117,8 +117,8 @@
     
     avatarImage.layer.cornerRadius = 5;
     avatarImage.layer.masksToBounds = YES;
-    avatarImage.layer.borderWidth = 1;
-    avatarImage.layer.borderColor = [[UIColor whiteColor] CGColor];
+    //avatarImage.layer.borderWidth = 1;
+    //avatarImage.layer.borderColor = [[UIColor whiteColor] CGColor];
     
     contentImage.layer.cornerRadius = 5;
     contentImage.layer.masksToBounds = YES;
@@ -146,13 +146,13 @@
     CGFloat padding = 320 - frame.origin.x - frame.size.width;
     
     frame = retweetCountImageView.frame;
-    CGSize size = [[NSString stringWithFormat:@"%d",status.retweetsCount] sizeWithFont:[UIFont systemFontOfSize:13 ]];
-    frame.origin.x = 320 - padding - size.width - retweetCountImageView.frame.size.width - 5;
+    CGSize size = [[NSString stringWithFormat:@"%d",status.retweetsCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0] }];
+    frame.origin.x = 320 - padding - ceilf(size.width) - retweetCountImageView.frame.size.width - 5;
     retweetCountImageView.frame = frame;
     
     frame = commentCountImageView.frame;
-    size = [[NSString stringWithFormat:@"%d     :%d",status.commentsCount,status.retweetsCount] sizeWithFont:[UIFont systemFontOfSize:12.0]];
-    frame.origin.x = 320 - padding - size.width - commentCountImageView.frame.size.width - 5;
+    size = [[NSString stringWithFormat:@"%d     :%d",status.commentsCount,status.retweetsCount] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0] }];
+    frame.origin.x = 320 - padding - ceilf(size.width) - commentCountImageView.frame.size.width - 5;
     commentCountImageView.frame = frame;
     
     //有转发
@@ -209,7 +209,7 @@
     frame = retwitterMainV.frame;
     
     if (haveRetwitterImage) 
-        frame.size.height = self.JSRetitterContentTF.frame.size.height + IMAGE_VIEW_HEIGHT + 15;
+        frame.size.height = self.JSRetitterContentTF.frame.size.height + IMAGE_VIEW_HEIGHT + 5;
     else 
         frame.size.height = self.JSRetitterContentTF.frame.size.height + 5;
     

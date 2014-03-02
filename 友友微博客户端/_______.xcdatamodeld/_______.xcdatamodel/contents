@@ -32,7 +32,7 @@
         <attribute name="timestamp" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="truncated" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="unread" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="retweetedStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatusCDItem" syncable="YES"/>
+        <relationship name="retweetedStatus" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StatusCDItem" inverseName="retweetedStatus" inverseEntity="StatusCDItem" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCDItem" syncable="YES"/>
     </entity>
     <entity name="UserCDItem" syncable="YES">
@@ -63,7 +63,7 @@
     </entity>
     <elements>
         <element name="Images" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="StatusCDItem" positionX="-54" positionY="18" width="128" height="465"/>
+        <element name="StatusCDItem" positionX="-54" positionY="18" width="128" height="30"/>
         <element name="UserCDItem" positionX="-54" positionY="135" width="128" height="403"/>
     </elements>
 </model>

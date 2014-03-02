@@ -37,7 +37,7 @@
 	imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePickerController.delegate = self;
 	imagePickerController.allowsEditing = NO;
-	[self presentModalViewController:imagePickerController animated:YES];
+	[self presentViewController:imagePickerController animated:YES completion:NULL];
 	//[imagePickerController release];
 }
 
@@ -59,7 +59,7 @@
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.delegate = self;
         imagePickerController.allowsEditing = NO;
-        [self presentModalViewController:imagePickerController animated:YES];
+        [self presentViewController:imagePickerController animated:YES completion:NULL];
       //  [imagePickerController release];
     }
 }
@@ -162,12 +162,7 @@
     TVBackView.image = [[UIImage imageNamed:@"input_window.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:15];
     
     [manager getMetionsStatuses];
-    //解决view被导航栏遮挡问题
-    if(([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -296,7 +291,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
     UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     self.theImageView.image = image;
     _shouldPostImage = YES;
@@ -304,7 +299,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - UIAlertViewDelegate

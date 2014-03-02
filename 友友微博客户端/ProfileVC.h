@@ -16,7 +16,7 @@
 @class ImageBrowser;
 
 #define kTextViewPadding            16.0
-#define kLineBreakMode              UILineBreakModeWordWrap
+//#define kLineBreakMode              NSLineBreakByWordWrapping
 
 @interface ProfileVC : PullRefreshTableViewController<UITableViewDelegate,UITableViewDataSource,StatusCellDelegate,ImageBrowserDelegate>
 {

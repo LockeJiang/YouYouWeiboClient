@@ -42,14 +42,14 @@
     NSLog(@"NSVC: viewDidLoad: tableview.contentinset.top:%f; tableview.contentoffset.y:%f", self.tableView.contentInset.top
           ,self.tableView.contentOffset.y);
     
-     NSLog(@"NearbyStatusVC: viewDidLoad:%i", statuesArr.count);
+     NSLog(@"NearbyStatusVC: viewDidLoad:%lu", (unsigned long)statuesArr.count);
 }
 
 - (void)viewDidUnload
 {
     [defaultNotifCenter removeObserver:self name:MMSinaGotNearbyStatuses object:nil];
     [super viewDidUnload];
-     NSLog(@"NearbyStatusVC: viewDidUnload:%i", statuesArr.count);
+     NSLog(@"NearbyStatusVC: viewDidUnload:%lu", (unsigned long)statuesArr.count);
 }
 
 -(void)viewDidAppear:(BOOL)animated

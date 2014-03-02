@@ -127,20 +127,26 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (isLoading) {
+    if (isLoading)
+    {
         // Update the content inset, good for section headers
         if (contentOffsetY < 0)
             self.tableView.contentInset = UIEdgeInsetsOriginal;        
         else if (contentOffsetY <= REFRESH_FOOTER_HEIGHT)
             self.tableView.contentInset = UIEdgeInsetsMiddle;
-    } else if (isDragging && contentOffsetY > 0) {
+    }
+    else if (isDragging && contentOffsetY > 0)
+    {
         // Update the arrow direction and label
         [UIView beginAnimations:nil context:NULL];
-        if (contentOffsetY > REFRESH_FOOTER_HEIGHT) {
+        if (contentOffsetY > REFRESH_FOOTER_HEIGHT)
+        {
             // User is scrolling above the header
             refreshLabel.text = self.textRelease;
             [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
-        } else { // User is scrolling somewhere within the header
+        }
+        else
+        { // User is scrolling somewhere within the header
             refreshLabel.text = self.textPull;
             [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
         }

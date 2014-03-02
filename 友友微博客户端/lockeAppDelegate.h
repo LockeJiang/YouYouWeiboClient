@@ -22,7 +22,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-- (void)setPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
+//- (void)setPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator;
 
 @end
 

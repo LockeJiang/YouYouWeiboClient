@@ -28,7 +28,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#define REFRESH_FOOTER_HEIGHT   70.0f
+#define REFRESH_FOOTER_HEIGHT   64.0f
 
 #define TEXT_COLOR	 [UIColor colorWithRed:87.0/255.0 green:108.0/255.0 blue:137.0/255.0 alpha:1.0]
 
@@ -41,8 +41,8 @@
 
 //
 #define UIEdgeInsetsOriginal    UIEdgeInsetsMake( 64, 0,-REFRESH_FOOTER_HEIGHT, 0)
-#define UIEdgeInsetsFinal       UIEdgeInsetsMake( 64, 0,0, 0)
-#define UIEdgeInsetsMiddle      UIEdgeInsetsMake( 64, 0, -(scrollView.contentOffset.y - startOffset), 0)
+#define UIEdgeInsetsFinal       UIEdgeInsetsMake( 0, 0,0, 0)
+#define UIEdgeInsetsMiddle      UIEdgeInsetsMake( 0, 0, -(scrollView.contentOffset.y - startOffset), 0)
 
 @interface PullRefreshTableViewController : UITableViewController {
     UIView *refreshFooterView;
